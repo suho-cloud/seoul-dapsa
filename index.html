@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="color-scheme" content="light">
 <meta name="theme-color" content="#3A2118">
-<title>서울, 도심의 켜를 걷다 — 2026 추계 정기학술답사 2일차</title>
+<title>서울 도심, 시간의 층을 걷다 — 2026 추계 정기학술답사 2일차</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&display=swap">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
@@ -146,6 +146,41 @@ footer .wrap{padding-top:22px;padding-bottom:calc(26px + env(safe-area-inset-bot
 .pk .d{width:11px;height:11px;border-radius:50%;background:#fff;border:2.5px solid var(--c)}
 .pk .lb{margin-top:2px;font:500 11px var(--sans);color:var(--muted);background:rgba(255,253,249,.9);padding:0 5px;border-radius:3px;white-space:nowrap}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+
+/* ── 휴대폰 우선 보완 ── */
+.main>div,.titlerow>div{min-width:0}
+.ribbon{min-width:0}
+.jump{position:sticky;top:0;z-index:20;display:flex;gap:6px;overflow-x:auto;padding:10px 0;margin-top:8px;background:linear-gradient(var(--paper) 80%,rgba(251,246,238,0));scrollbar-width:none}
+.jump::-webkit-scrollbar{display:none}
+.jump button{flex:none;font:600 13px var(--sans);border:1.5px solid var(--line);background:var(--sheet);color:var(--ink);border-radius:99px;padding:5px 11px 5px 5px;display:flex;align-items:center;gap:6px;cursor:pointer;white-space:nowrap;min-height:36px}
+.jump button span{width:24px;height:24px;border-radius:7px;background:var(--c);color:#fff;display:grid;place-items:center;font:700 12px var(--serif)}
+.jump button[aria-current="true"]{border-color:var(--c);background:#fff;box-shadow:0 0 0 1.5px var(--c) inset}
+.st .acts{flex-wrap:wrap;gap:8px}
+.st .acts a{border:1px solid var(--line);border-radius:10px;padding:7px 11px;background:#fff;border-bottom:1px solid var(--line);min-height:36px;display:inline-flex;align-items:center}
+.st .acts a.walk{background:var(--c);color:#fff;border-color:var(--c)}
+@media (max-width:760px){
+  body{font-size:16px}
+  .top .wrap{padding-top:20px;padding-bottom:22px}
+  .org span:last-child{display:none}
+  .titlerow p{font-size:15px}
+  .date{text-align:left;display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;padding:12px 14px;min-width:0}
+  .date .d{font-size:32px}.date .w{margin:0}.date .k{margin:0;width:100%}
+  .ribbon ol{display:flex;overflow-x:auto;gap:0;scroll-snap-type:x mandatory;padding-bottom:6px;scrollbar-width:none}
+  .ribbon ol::-webkit-scrollbar{display:none}
+  .ribbon li{flex:0 0 118px;scroll-snap-align:start}
+  .main{margin-top:18px;gap:18px}
+  #mapbox{height:52vh;min-height:300px}
+  .seg button{padding:12px 4px 10px;font-size:15px}
+  .coursehd span{display:none}
+  .st{grid-template-columns:34px minmax(0,1fr);gap:10px}
+  .st .pin{width:34px;height:34px;font-size:16px}
+  .course::before{left:16px}
+  .mid{grid-template-columns:34px minmax(0,1fr);gap:10px}
+  .mid .dot{margin-left:10px}
+  .st h3{font-size:18px}
+  .st p{font-size:14.5px}
+  .sec{margin-top:40px}
+}
 </style>
 </head>
 <body>
@@ -155,7 +190,7 @@ footer .wrap{padding-top:22px;padding-bottom:calc(26px + env(safe-area-inset-bot
     <div class="org"><span>공주대학교 지리학과 · 2026 추계 정기학술답사</span><span>2일차 · 서울 도보답사</span></div>
     <div class="titlerow">
       <div>
-        <h1>서울, 도심의<br><em>켜</em>를 걷다</h1>
+        <h1>서울 도심,<br><em>시간의 층</em>을 걷다</h1>
         <p>조선의 궁궐 담장과 1920년대 한옥, 1960년대 메가구조물, 복원된 하천과 관광 상권까지. 북촌에서 명동까지 걸으며 시대마다 쌓인 도시의 층을 읽고, 세 곳에서 조별 인터뷰를 합니다.</p>
       </div>
       <div class="date"><div class="d">11.03</div><div class="w">TUESDAY</div><div class="k">도보 약 6.5km · 조별 인터뷰 3회</div></div>
@@ -194,7 +229,8 @@ footer .wrap{padding-top:22px;padding-bottom:calc(26px + env(safe-area-inset-bot
     </div>
 
     <div>
-      <div class="coursehd"><h2>코스</h2><span>누르면 지도가 따라갑니다</span></div>
+      <div class="coursehd"><h2>코스</h2><span>카드를 누르면 지도가 그 지점으로 갑니다</span></div>
+      <nav class="jump" id="jump" aria-label="지점 바로가기"></nav>
       <ol class="course" id="course"></ol>
     </div>
   </div>
@@ -208,27 +244,16 @@ footer .wrap{padding-top:22px;padding-bottom:calc(26px + env(safe-area-inset-bot
     </div>
   </section>
 
-  <section class="sec">
-    <h2>구간별 길찾기</h2>
-    <p class="lead">카카오맵 도보 길찾기가 바로 열립니다. 조별로 흩어져도 이 링크를 따라오면 됩니다.</p>
-    <div class="dirgrid" id="dir"></div>
-  </section>
+  
 
-  <section class="sec twocol">
-    <div>
-      <h2>버스 이동</h2>
-      <div class="bus">
-        <div><b>07:40</b>의정부 숙소 출발<small>08:00 아침식사(국밥) · 우리나라 국밥 본점</small></div>
-        <div><b>09:30</b>삼청동길 하차<small>국립현대미술관 서울관 앞</small></div>
-        <div><b>18:00</b>남산예장공원 승차<small>명동거리 → 명동역 → 남산예장공원</small></div>
-        <div><b>19:30</b>고양 · 저녁식사(김치두루치기)<small>김가네김치두루치기</small></div>
-        <div><b>20:30</b>파주 · 숙소<small>파주골든힐호텔</small></div>
-      </div>
-    </div>
-    <div>
-      <h2>챙길 것</h2>
-      <p class="lead">챙긴 것은 눌러서 지우세요. 이 기기에만 저장됩니다.</p>
-      <div class="tags" id="check"></div>
+  <section class="sec">
+    <h2>버스 이동</h2>
+    <div class="bus">
+      <div><b>07:40</b>의정부 숙소 출발<small>08:00 아침식사(국밥) · 우리나라 국밥 본점</small></div>
+      <div><b>09:30</b>삼청동길 하차<small>국립현대미술관 서울관 앞</small></div>
+      <div><b>18:00</b>남산예장공원 승차<small>명동거리 → 명동역 → 남산예장공원</small></div>
+      <div><b>19:30</b>고양 · 저녁식사(김치두루치기)<small>김가네김치두루치기</small></div>
+      <div><b>20:30</b>파주 · 숙소<small>파주골든힐호텔</small></div>
     </div>
   </section>
 </main>
@@ -257,14 +282,16 @@ const S=[
 // 코스 목록 순서 (일정표 행 순서 그대로)
 const ORDER=[1,2,{iv:"북촌 한옥마을 조별 인터뷰 진행",p:"am"},{meal:"자율 점심시간",t:"11:30–12:30",note:"점심 후 안국역에서 출발",p:"am"},3,4,5,{iv:"서순라길 조별 인터뷰 진행",p:"pm"},6,7,8,{iv:"청계천 조별 인터뷰 진행 예정",p:"pm"},9,10,11,12];
 const PASS=[["북촌로5길",37.57985,126.98294,"am"],["계동길",37.58059,126.98677,"am"],["안국역",37.57689,126.98631,"am"],["종묘시민광장",37.57148,126.99502,"pm"],["골뱅이골목",37.56567,126.98413,"ev"],["명동역",37.56091,126.98633,"ev"]];
-const CHECK=["조별 인터뷰 질문지","역할 분담 (질문·기록·사진)","편한 운동화","겉옷","보조배터리","학생증","우리 조 번호·조장 확인","18:00 승차 시각"];
-const KEY="dapsa-2026-day2-pack";
+//["조별 인터뷰 질문지","역할 분담 (질문·기록·사진)","편한 운동화","겉옷","보조배터리","학생증","우리 조 번호·조장 확인","18:00 승차 시각"];
+
 const LEAF='<svg class="leaf" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2c3 4 8 5 8 11a8 8 0 0 1-16 0c0-6 5-7 8-11z" fill="currentColor"/><path d="M12 6v16" stroke="#fff" stroke-width="1.3"/></svg>';
 
 function len(l){let d=0;for(let i=1;i<l.length;i++){const a=l[i-1],b=l[i],x=(b[1]-a[1])*Math.PI/180*Math.cos((a[0]+b[0])/2*Math.PI/180),y=(b[0]-a[0])*Math.PI/180;d+=6371000*Math.hypot(x,y);}return d;}
 const keysOf=p=>{const ks=[];S.forEach(s=>{if(p==='all'||s.p===p){s.path&&ks.push(s.path);s.inside&&ks.push(s.inside);}});if(p==='all'||p==='am')ks.push('a_lunch');return ks;};
 const meters=p=>keysOf(p).reduce((a,k)=>a+len(P[k]),0);
 
+const wl=(a,b)=>`https://map.kakao.com/link/by/walk/${encodeURIComponent(a.name)},${a.lat},${a.lng}/${encodeURIComponent(b.name)},${b.lat},${b.lng}`;
+const PREV={};S.forEach((s,i)=>{if(i>0)PREV[s.n]=S[i-1];});PREV[3]={name:"안국역",lat:37.57689,lng:126.98631};
 /* 코스 목록 */
 const course=document.getElementById('course');const items={};
 ORDER.forEach(o=>{const li=document.createElement('li');
@@ -275,26 +302,16 @@ ORDER.forEach(o=>{const li=document.createElement('li');
       <h3>${s.name}${s.sub?`<span class="sub">${s.sub}</span>`:''}${s.badge?`<span class="badge ${s.badge[1]}">${s.badge[0]}</span>`:''}</h3>
       ${s.desc?`<p>${s.desc}</p>`:''}
       ${s.route?`<div class="via">${s.route}${wm}</div>`:''}
-      <div class="acts"><a href="https://map.kakao.com/link/map/${encodeURIComponent(s.name)},${s.lat},${s.lng}" target="_blank" rel="noopener">카카오맵</a><a href="https://map.kakao.com/link/to/${encodeURIComponent(s.name)},${s.lat},${s.lng}" target="_blank" rel="noopener">여기로 길찾기</a></div></div>`;
+      <div class="acts">${PREV[s.n]?`<a class="walk" href="${wl(PREV[s.n],s)}" target="_blank" rel="noopener">${PREV[s.n].name}에서 걸어가기 ↗</a>`:''}<a href="https://map.kakao.com/link/to/${encodeURIComponent(s.name)},${s.lat},${s.lng}" target="_blank" rel="noopener">내 위치에서 길찾기 ↗</a></div></div>`;
     const b=li.querySelector('.body');b.addEventListener('click',e=>{if(e.target.tagName!=='A')pick(s.n,false)});b.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();pick(s.n,false)}});items[s.n]=li;}
   else if(o.iv){li.className='mid';li.style.setProperty('--c','#2E5E4A');li.innerHTML=`<div class="dot"></div><div class="txt">${LEAF}${o.iv}<span class="badge b-iv">조별 인터뷰</span></div>`;}
   else{li.className='mid';li.style.setProperty('--c','#C98A0B');li.innerHTML=`<div class="dot"></div><div class="txt">${o.t} ${o.meal}<small>${o.note}</small></div>`;}
   course.appendChild(li);});
 
-/* 길찾기 */
-const wl=(a,b)=>`https://map.kakao.com/link/by/walk/${encodeURIComponent(a.name)},${a.lat},${a.lng}/${encodeURIComponent(b.name)},${b.lat},${b.lng}`;
-const anguk={name:"안국역",lat:37.57689,lng:126.98631};
-const dir=document.getElementById('dir');
-[[S[0],S[1],"am","1→2"],[S[1],anguk,"am","2→점심"],[anguk,S[2],"pm","점심→3"],[S[2],S[3],"pm","3→4"],[S[3],S[4],"pm","4→5"],[S[4],S[5],"pm","5→6"],[S[5],S[6],"pm","6→7"],[S[6],S[7],"pm","7→8"],[S[7],S[8],"ev","8→9"],[S[8],S[9],"ev","9→10"],[S[9],S[10],"ev","10→11"],[S[10],S[11],"ev","11→12"]]
- .forEach(([a,b,p,k])=>{const x=document.createElement('a');x.href=wl(a,b);x.target='_blank';x.rel='noopener';x.style.setProperty('--c',PC[p]);
-   x.innerHTML=`<span class="k">${k.split('→')[1]==='점심'?'점':k.split('→')[1]}</span>${a.name} → ${b.name}<em>도보 ↗</em>`;dir.appendChild(x);});
-
-/* 챙길 것 */
-let done={};try{done=JSON.parse(localStorage.getItem(KEY)||'{}')}catch(e){}
-const ck=document.getElementById('check');
-CHECK.forEach((c,i)=>{const b=document.createElement('button');b.type='button';b.textContent=c;b.setAttribute('aria-pressed',!!done[i]);
-  b.addEventListener('click',()=>{done[i]=!done[i];b.setAttribute('aria-pressed',done[i]);try{localStorage.setItem(KEY,JSON.stringify(done))}catch(_){}});ck.appendChild(b);});
-
+/* 지점 바로가기 */
+const jump=document.getElementById('jump');const jb={};
+S.forEach(s=>{const b=document.createElement('button');b.type='button';b.style.setProperty('--c',PC[s.p]);b.innerHTML=`<span>${s.n}</span>${s.name}`;
+  b.addEventListener('click',()=>{items[s.n].scrollIntoView({behavior:'smooth',block:'center'});pick(s.n,null);});jump.appendChild(b);jb[s.n]=b;});
 /* 탭 + 지도 */
 let map=null,K=null,mk={},lines=[],bounds={},cur=null,period='all';
 function setPeriod(p){period=p;document.querySelectorAll('#seg button').forEach(b=>b.setAttribute('aria-selected',b.dataset.p===p));
@@ -303,10 +320,10 @@ function setPeriod(p){period=p;document.querySelectorAll('#seg button').forEach(
   if(map){lines.forEach(o=>o.ln.setOptions({strokeOpacity:(p==='all'||o.p===p)?1:.15}));map.setBounds(bounds[p],50,50,50,50);}}
 document.querySelectorAll('#seg button').forEach(b=>b.addEventListener('click',()=>setPeriod(b.dataset.p)));
 function pick(n,fromMap){if(cur){items[cur].classList.remove('on');mk[cur]&&mk[cur].classList.remove('on');}
-  cur=n;items[n].classList.add('on');mk[n]&&mk[n].classList.add('on');
+  cur=n;items[n].classList.add('on');Object.values(jb).forEach(b=>b.removeAttribute('aria-current'));jb[n].setAttribute('aria-current','true');jb[n].scrollIntoView({block:'nearest',inline:'center'});mk[n]&&mk[n].classList.add('on');
   const s=S[n-1];if(map){map.setLevel(Math.min(map.getLevel(),4));map.panTo(new K.LatLng(s.lat,s.lng));}
-  if(fromMap)items[n].scrollIntoView({behavior:'smooth',block:'center'});
-  else if(window.innerWidth<=960)document.getElementById('mapbox').scrollIntoView({behavior:'smooth',block:'center'});}
+  if(fromMap===true)items[n].scrollIntoView({behavior:'smooth',block:'center'});
+  else if(fromMap===false&&window.innerWidth<=960)document.getElementById('mapbox').scrollIntoView({behavior:'smooth',block:'center'});}
 setPeriod('all');
 
 function err(msg){const e=document.getElementById('maperr');e.hidden=false;e.innerHTML=msg;}
