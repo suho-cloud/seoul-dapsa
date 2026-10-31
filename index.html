@@ -4,315 +4,311 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="color-scheme" content="light">
-<meta name="theme-color" content="#0B1633">
-<title>서울 도보답사 2026 — 공주대 지리학과 추계 정기학술답사 2일차</title>
+<meta name="theme-color" content="#3A2118">
+<title>서울, 도심의 켜를 걷다 — 2026 추계 정기학술답사 2일차</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&display=swap">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
 <style>
+/* 가을 팔레트: 밤색 바탕, 은행 황금, 단풍 주홍, 감빛, 솔잎 녹색 */
 :root{
-  --navy:#0B1633;--navy2:#1E3A7B;--ink:#151B2B;--muted:#5C6478;--faint:#8A91A3;--line:#E3E7EF;--bg:#F2F4F8;--card:#FFFFFF;
-  --am:#2563EB;--pm:#0F8A5F;--ev:#E0592A;--bus:#7A5AF8;--warnbg:#FFF6DD;--warnline:#F2D27A;
-  --f:"Pretendard","Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
+  --bark:#3A2118;--bark2:#5A3424;--paper:#FBF6EE;--sheet:#FFFDF9;--ink:#2B1E18;--muted:#776256;--faint:#A08F84;--line:#EADFD1;
+  --ginkgo:#C98A0B;--maple:#B5361E;--plum:#6B3460;--pine:#2E5E4A;--persimmon:#E07A2E;
+  --serif:"Gowun Batang","Nanum Myeongjo",serif;--sans:"Pretendard","Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
 }
 *{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%}
-body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--f);font-size:15px;line-height:1.6;word-break:keep-all}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.6;word-break:keep-all}
 a{color:inherit}
-.wrap{max-width:800px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left));padding-right:max(16px,env(safe-area-inset-right))}
-/* hero */
-.hero{position:relative;overflow:hidden;color:#fff;background:linear-gradient(180deg,var(--navy) 0%,#172C63 55%,#3A5BB0 100%);padding:40px 0 120px}
-.hero svg.wave{position:absolute;left:0;right:0;bottom:0;width:100%;height:120px;opacity:.55}
-.hero .eyebrow{font-size:13px;font-weight:600;color:#C9D4F3;letter-spacing:.01em}
-.hero h1{font-size:clamp(26px,5vw,34px);line-height:1.3;margin:10px 0 12px;font-weight:800;letter-spacing:-.02em}
-.hero p{margin:0;max-width:34em;color:#DCE3F7;font-size:15.5px}
-.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
-.chips span{font-size:13px;font-weight:600;padding:6px 12px;border-radius:99px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.22)}
-/* summary card */
-.summary{position:relative;margin-top:-84px;background:linear-gradient(180deg,#F7F9FF,#FFFFFF);border:1px solid var(--line);border-radius:18px;box-shadow:0 10px 30px rgba(11,22,51,.12);padding:20px 22px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
-@media (max-width:720px){.summary{grid-template-columns:repeat(2,minmax(0,1fr))}}
-.summary .k{font-size:12px;color:var(--muted);font-weight:600}
-.summary .v{font-size:16px;font-weight:700;margin-top:2px}
-.summary .s{font-size:12.5px;color:var(--faint);margin-top:2px;line-height:1.45}
-/* sections */
-section{margin-top:40px}
-h2{font-size:22px;font-weight:800;margin:0;letter-spacing:-.01em}
-.lead{color:var(--muted);font-size:13.5px;margin:4px 0 0}
-.shead{display:flex;justify-content:space-between;align-items:flex-end;gap:12px}
-.shead .src{font-size:11px;font-weight:700;color:var(--muted);letter-spacing:.04em}
-.card{background:var(--card);border:1px solid var(--line);border-radius:18px;margin-top:14px;overflow:hidden}
-/* tabs */
-.tabs{display:flex;gap:8px;flex-wrap:wrap;padding:14px}
-.tabs button{font:inherit;font-size:14px;font-weight:700;border:1px solid var(--line);background:#fff;color:var(--ink);border-radius:12px;padding:9px 14px;cursor:pointer;display:flex;gap:6px;align-items:baseline}
-.tabs button small{font-weight:500;font-size:12px;color:var(--muted)}
-.tabs button[aria-selected="true"]{background:var(--navy);color:#fff;border-color:var(--navy)}
-.tabs button[aria-selected="true"] small{color:#C9D4F3}
-.course{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:6px 18px 14px;border-top:1px solid var(--line)}
-.course b{display:block;font-size:17px;padding-top:10px}
-.course span{font-size:13px;color:var(--muted)}
-.course button{font:inherit;font-size:13px;font-weight:600;border:1px solid var(--line);background:#fff;border-radius:10px;padding:7px 12px;cursor:pointer;flex:none}
-#mapbox{position:relative;height:440px;background:#E8ECF2}
+.wrap{max-width:1180px;margin:0 auto;padding-left:max(18px,env(safe-area-inset-left));padding-right:max(18px,env(safe-area-inset-right))}
+
+/* ── 머리 ── */
+.top{background:var(--bark);color:#F6E9DA;position:relative;overflow:hidden}
+.top canvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.top .wrap{position:relative;padding-top:28px;padding-bottom:34px}
+.org{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-size:12.5px;letter-spacing:.06em;color:#D8BFA8}
+.titlerow{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:28px;align-items:end;margin-top:38px}
+@media (max-width:760px){.titlerow{grid-template-columns:1fr;gap:18px;margin-top:26px}}
+.titlerow h1{font-family:var(--serif);font-weight:700;font-size:clamp(34px,6.4vw,62px);line-height:1.12;margin:0;letter-spacing:-.01em}
+.titlerow h1 em{font-style:normal;color:#F2B544}
+.titlerow p{margin:14px 0 0;max-width:36em;color:#E3D0BE;font-size:15.5px}
+.date{border:1px solid rgba(242,181,68,.55);border-radius:14px;padding:14px 18px;min-width:190px;text-align:right}
+.date .d{font-family:var(--serif);font-size:44px;line-height:1;color:#F2B544}
+.date .w{font-size:13px;letter-spacing:.2em;color:#E3D0BE;margin-top:6px}
+.date .k{font-size:12.5px;color:#D8BFA8;margin-top:8px}
+
+/* 하루 띠 */
+.ribbon{margin-top:30px;border-top:1px solid rgba(255,255,255,.15);padding-top:18px}
+.ribbon ol{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:0}
+@media (max-width:760px){.ribbon ol{grid-template-columns:repeat(4,minmax(0,1fr));row-gap:14px}}
+.ribbon li{position:relative;padding:14px 8px 0 0;font-size:12.5px;color:#E3D0BE;line-height:1.35}
+.ribbon li::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:var(--c,rgba(255,255,255,.25))}
+.ribbon li::after{content:"";position:absolute;top:-4px;left:0;width:11px;height:11px;border-radius:50%;background:var(--bark);border:2px solid var(--c,#D8BFA8)}
+.ribbon b{display:block;font-size:15px;color:#fff;font-variant-numeric:tabular-nums;font-weight:700}
+.ribbon li.walk{--c:#F2B544}
+.ribbon li.walk b{color:#F2B544}
+
+/* ── 본문: 지도 + 코스 ── */
+.main{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:26px;margin-top:30px;align-items:start}
+@media (max-width:960px){.main{grid-template-columns:1fr}}
+.mapcol{position:sticky;top:16px}
+@media (max-width:960px){.mapcol{position:static}}
+.mapcard{background:var(--sheet);border:1px solid var(--line);border-radius:20px;overflow:hidden;box-shadow:0 12px 30px -18px rgba(58,33,24,.45)}
+.seg{display:grid;grid-template-columns:repeat(4,1fr);border-bottom:1px solid var(--line)}
+.seg button{font:inherit;border:0;background:transparent;padding:12px 6px 10px;cursor:pointer;color:var(--muted);font-weight:600;font-size:14px;border-bottom:3px solid transparent;display:flex;flex-direction:column;align-items:center;gap:1px}
+.seg button small{font-weight:500;font-size:11.5px;color:var(--faint)}
+.seg button[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--c)}
+.seg button:focus-visible{outline:2px solid var(--maple);outline-offset:-2px}
+#mapbox{position:relative;height:min(62vh,560px);min-height:360px;background:#EFE7DB}
 #map{position:absolute;inset:0}
 #maperr{position:absolute;inset:0;display:grid;place-items:center;padding:24px;text-align:center;color:var(--muted);font-size:14px}
 #maperr[hidden]{display:none}
-.legend{display:flex;flex-wrap:wrap;gap:6px 16px;padding:12px 18px 0;font-size:12.5px;color:var(--muted)}
-.legend i{display:inline-block;width:18px;height:4px;border-radius:2px;background:var(--c);vertical-align:middle;margin-right:6px}
-.legend .pd{display:inline-block;width:11px;height:11px;border-radius:50%;border:2px dashed var(--muted);vertical-align:-1px;margin-right:6px}
-.mnote{font-size:12.5px;color:var(--faint);padding:4px 18px 14px}
-.stops{display:flex;gap:8px;overflow-x:auto;padding:14px 18px;border-top:1px solid var(--line);scrollbar-width:thin}
-.stops button{flex:none;font:inherit;font-size:13px;font-weight:600;border:1px solid var(--line);background:#fff;border-radius:99px;padding:5px 12px 5px 5px;display:flex;gap:7px;align-items:center;cursor:pointer;white-space:nowrap}
-.stops button[aria-pressed="true"]{border-color:var(--c);box-shadow:0 0 0 2px var(--c) inset}
-.n{width:22px;height:22px;border-radius:50%;background:var(--c);color:#fff;display:inline-grid;place-items:center;font-size:12px;font-weight:700;flex:none}
-.detail{padding:6px 18px 18px}
-.detail h3{font-size:16px;margin:4px 0 4px}
-.detail p{margin:0;color:var(--muted);font-size:14px}
-.detail a{display:inline-block;margin-top:8px;font-size:13px;font-weight:600;color:var(--am)}
-/* timetable */
-.tt{padding:6px 0}
-.ti{display:grid;grid-template-columns:110px minmax(0,1fr);gap:4px 14px;padding:14px 20px;border-top:1px solid var(--line)}
-.ti:first-child{border-top:0}
-.ti .tm{font-weight:700;font-size:14px;color:var(--c);font-variant-numeric:tabular-nums}
-.ti .tm.none{color:var(--faint);font-weight:500}
-.ti h4{margin:0;font-size:15.5px;display:flex;flex-wrap:wrap;gap:6px;align-items:center}
-.ti p{margin:3px 0 0;font-size:13.5px;color:var(--muted)}
-.ti .route{font-size:12.5px;color:var(--faint);margin-top:3px}
-.tag{font-size:11.5px;font-weight:700;padding:2px 8px;border-radius:99px;background:var(--tb);color:var(--tc)}
-.tag.iv{--tb:#EDE8FF;--tc:#5B3FD6}
-.tag.warn{--tb:#FFE9E2;--tc:#C2410C}
-.tag.meal{--tb:#FFF1D6;--tc:#9A6400}
-.tag.bus{--tb:#EEF0FF;--tc:#4B4FC8}
-.ti.minor{background:#FAFBFD}
-.ti.minor h4{font-size:14px;font-weight:600}
-.warnbox{margin-top:14px;background:var(--warnbg);border:1px solid var(--warnline);border-radius:14px;padding:14px 18px;font-size:13.5px;color:#7A5A00}
-/* directions */
-.dir{display:flex;flex-wrap:wrap;gap:8px;padding:16px 18px}
-.dir a{font-size:13.5px;font-weight:600;text-decoration:none;border:1px solid var(--line);border-radius:12px;padding:9px 13px;background:#fff;display:flex;gap:6px;align-items:center}
-.dir a::after{content:"↗";color:var(--faint);font-weight:500}
-.dir a i{width:8px;height:8px;border-radius:50%;background:var(--c);display:inline-block}
-.moves{border-top:1px solid var(--line)}
-.mv{display:grid;grid-template-columns:110px minmax(0,1fr);gap:14px;padding:12px 18px;border-top:1px solid var(--line);font-size:14px}
-.mv:first-child{border-top:0}
-.mv b{color:var(--bus);font-variant-numeric:tabular-nums}
-.mv span small{display:block;color:var(--faint);font-size:12.5px}
-/* safety */
-.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:14px}
-@media (max-width:640px){.grid2{grid-template-columns:1fr}}
-.tile{background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px 16px}
-.tile b{display:block;font-size:14px;margin-bottom:2px}
-.tile span{font-size:13.5px;color:var(--muted)}
-/* checklist */
-.check{list-style:none;margin:0;padding:6px 0}
-.check li{border-top:1px solid var(--line)}
-.check li:first-child{border-top:0}
-.check button{all:unset;box-sizing:border-box;width:100%;display:flex;gap:12px;align-items:center;padding:13px 18px;cursor:pointer;font-size:14.5px}
-.check button:focus-visible{outline:2px solid var(--am);outline-offset:-2px}
-.check .box{width:20px;height:20px;border-radius:6px;border:2px solid #C5CBD8;flex:none;display:grid;place-items:center}
-.check li.done .box{background:var(--pm);border-color:var(--pm)}
-.check li.done .box::after{content:"";width:9px;height:5px;border:2px solid #fff;border-top:0;border-right:0;transform:rotate(-45deg) translate(1px,-1px)}
-.check li.done .txt{text-decoration:line-through;color:var(--faint)}
-footer{margin:48px 0 0;padding:24px 0 calc(32px + env(safe-area-inset-bottom));border-top:1px solid var(--line);font-size:12.5px;color:var(--faint)}
-/* map overlays */
+.mapfoot{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;padding:12px 16px}
+.stat{font-family:var(--serif);font-size:18px}
+.stat small{font-family:var(--sans);font-size:12.5px;color:var(--muted);margin-left:6px}
+.key{display:flex;gap:12px;flex-wrap:wrap;font-size:12px;color:var(--muted)}
+.key i{display:inline-block;width:16px;height:4px;border-radius:2px;background:var(--c);vertical-align:middle;margin-right:5px}
+.mapnote{font-size:12px;color:var(--faint);padding:0 16px 14px}
+
+.coursehd{display:flex;align-items:baseline;justify-content:space-between;gap:10px}
+.coursehd h2,.sec h2{font-family:var(--serif);font-size:26px;margin:0;font-weight:700}
+.coursehd span{font-size:13px;color:var(--muted)}
+.course{list-style:none;margin:14px 0 0;padding:0;position:relative}
+.course::before{content:"";position:absolute;left:19px;top:8px;bottom:8px;width:2px;background:repeating-linear-gradient(to bottom,var(--line) 0 6px,transparent 6px 11px)}
+.st{position:relative;display:grid;grid-template-columns:40px minmax(0,1fr);gap:12px;padding:10px 0}
+.st .pin{width:40px;height:40px;border-radius:12px;background:var(--c);color:#fff;display:grid;place-items:center;font-family:var(--serif);font-weight:700;font-size:18px;position:relative;z-index:1;transform:rotate(-4deg);box-shadow:0 4px 10px -4px rgba(0,0,0,.4)}
+.st .body{background:var(--sheet);border:1px solid var(--line);border-radius:14px;padding:12px 14px;cursor:pointer;transition:border-color .15s,box-shadow .15s}
+.st .body:hover{border-color:var(--c)}
+.st.on .body{border-color:var(--c);box-shadow:0 0 0 2px var(--c)}
+.st .tm{font-size:12.5px;font-weight:700;color:var(--c);font-variant-numeric:tabular-nums}
+.st .tm.soft{color:var(--faint);font-weight:500}
+.st h3{margin:2px 0 0;font-size:17px;display:flex;flex-wrap:wrap;align-items:center;gap:6px}
+.st h3 .sub{font-size:13px;font-weight:500;color:var(--muted)}
+.st p{margin:4px 0 0;font-size:13.5px;color:var(--muted)}
+.st .via{font-size:12.5px;color:var(--faint);margin-top:6px;display:flex;gap:6px;align-items:baseline}
+.st .via::before{content:"걷는 길";font-size:11px;font-weight:700;color:var(--c);border:1px solid var(--c);border-radius:4px;padding:0 4px;flex:none}
+.st .walkm{font-size:11.5px;color:var(--faint);margin-left:auto}
+.st .acts{display:flex;gap:12px;margin-top:8px;font-size:12.5px}
+.st .acts a{color:var(--c);font-weight:600;text-decoration:none;border-bottom:1px solid currentColor}
+/* 사이 행: 인터뷰, 점심 */
+.mid{position:relative;display:grid;grid-template-columns:40px minmax(0,1fr);gap:12px;padding:4px 0}
+.mid .dot{width:14px;height:14px;border-radius:50%;background:var(--paper);border:3px solid var(--c);margin:8px 0 0 13px;position:relative;z-index:1}
+.mid .txt{font-size:14px;font-weight:600;color:var(--c);display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:4px 0}
+.mid .txt small{font-weight:500;color:var(--muted);font-size:12.5px}
+.badge{font-size:11.5px;font-weight:700;padding:1px 8px;border-radius:99px;background:var(--bb);color:var(--bc);white-space:nowrap}
+.b-iv{--bb:#E3EFE8;--bc:#2E5E4A}
+.b-warn{--bb:#FBE3DC;--bc:#9E2E17}
+.b-bus{--bb:#EFE3EC;--bc:#6B3460}
+.leaf{width:14px;height:14px;flex:none}
+
+/* ── 아래 영역 ── */
+.sec{margin-top:56px}
+.sec .lead{color:var(--muted);font-size:13.5px;margin:6px 0 0}
+.notice{margin-top:22px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+@media (max-width:760px){.notice{grid-template-columns:1fr}}
+.nt{border-radius:16px;padding:16px 18px;background:var(--bg);color:var(--fg)}
+.nt b{display:block;font-family:var(--serif);font-size:17px;margin-bottom:4px}
+.nt span{font-size:13.5px;opacity:.92}
+.nt.a{--bg:#F7E5C2;--fg:#5A3A07}
+.nt.b{--bg:#F4D3C6;--fg:#5E1E10}
+.nt.c{--bg:#E2D3DD;--fg:#3E1C37}
+
+.dirgrid{margin-top:16px;display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:8px}
+.dirgrid a{display:flex;align-items:center;gap:10px;text-decoration:none;background:var(--sheet);border:1px solid var(--line);border-radius:12px;padding:10px 12px;font-size:13.5px;font-weight:600}
+.dirgrid a:hover{border-color:var(--c)}
+.dirgrid a span.k{width:26px;height:26px;border-radius:8px;background:var(--c);color:#fff;display:grid;place-items:center;font-size:12px;flex:none}
+.dirgrid a em{font-style:normal;margin-left:auto;white-space:nowrap;padding-left:6px;color:var(--faint);font-weight:500;font-size:12px}
+
+.twocol{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:26px}
+@media (max-width:860px){.twocol{grid-template-columns:1fr}}
+.bus{margin-top:16px;border-left:2px solid var(--plum);padding-left:18px;display:grid;gap:14px}
+.bus div{position:relative}
+.bus div::before{content:"";position:absolute;left:-25px;top:6px;width:12px;height:12px;border-radius:50%;background:var(--paper);border:2px solid var(--plum)}
+.bus b{font-variant-numeric:tabular-nums;color:var(--plum);margin-right:8px}
+.bus small{display:block;color:var(--muted);font-size:12.5px}
+
+.tags{margin-top:16px;display:flex;flex-wrap:wrap;gap:8px}
+.tags button{font:inherit;font-size:14px;border:1.5px solid var(--line);background:var(--sheet);border-radius:99px;padding:8px 14px;cursor:pointer;display:flex;align-items:center;gap:8px;color:var(--ink)}
+.tags button::before{content:"";width:14px;height:14px;border-radius:50%;border:2px solid var(--ginkgo)}
+.tags button[aria-pressed="true"]{background:#F3E7D6;color:var(--faint);text-decoration:line-through;border-color:#E2CDB1}
+.tags button[aria-pressed="true"]::before{background:var(--ginkgo)}
+.tags button:focus-visible{outline:2px solid var(--maple);outline-offset:2px}
+
+footer{margin-top:64px;background:var(--bark);color:#D8BFA8;font-size:12.5px}
+footer .wrap{padding-top:22px;padding-bottom:calc(26px + env(safe-area-inset-bottom));display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+
+/* 지도 위 표시 */
 .mk{display:grid;justify-items:center;cursor:pointer}
-.mk .dot{width:30px;height:30px;border-radius:50%;background:var(--c);color:#fff;font:700 13px var(--f);display:grid;place-items:center;border:2.5px solid #fff;box-shadow:0 2px 6px rgba(0,0,0,.35);transition:transform .15s}
-.mk.on .dot{transform:scale(1.25)}
-.mk .lb{margin-top:3px;font:600 12px var(--f);background:rgba(255,255,255,.95);padding:1px 7px;border-radius:4px;box-shadow:0 0 0 1px rgba(0,0,0,.08);white-space:nowrap}
+.mk .p{width:30px;height:30px;border-radius:9px;transform:rotate(-4deg);background:var(--c);color:#fff;font:700 14px var(--serif);display:grid;place-items:center;border:2px solid #fff;box-shadow:0 3px 8px rgba(0,0,0,.35);transition:transform .15s}
+.mk.on .p{transform:rotate(-4deg) scale(1.28)}
+.mk .lb{margin-top:3px;font:600 12px var(--sans);color:var(--ink);background:rgba(255,253,249,.96);padding:1px 7px;border-radius:4px;box-shadow:0 0 0 1px rgba(58,33,24,.12);white-space:nowrap}
 .pk{display:grid;justify-items:center}
-.pk .d{width:12px;height:12px;border-radius:50%;background:#fff;border:2.5px dashed var(--c)}
-.pk .lb{margin-top:2px;font:500 11px var(--f);color:var(--muted);background:rgba(255,255,255,.9);padding:0 5px;border-radius:3px;white-space:nowrap}
+.pk .d{width:11px;height:11px;border-radius:50%;background:#fff;border:2.5px solid var(--c)}
+.pk .lb{margin-top:2px;font:500 11px var(--sans);color:var(--muted);background:rgba(255,253,249,.9);padding:0 5px;border-radius:3px;white-space:nowrap}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
 </style>
 </head>
 <body>
-<header class="hero">
+<header class="top">
+  <canvas id="leaves" aria-hidden="true"></canvas>
   <div class="wrap">
-    <div class="eyebrow">공주대학교 지리학과 · 2026 추계 정기학술답사 2일차</div>
-    <h1>한옥 골목에서 재개발 현장까지,<br>서울 도심을 걸어서 읽는 하루</h1>
-    <p>삼청동길에서 출발해 북촌, 낙원·익선동, 서순라길과 종묘, 세운상가와 청계천을 지나 을지로 골목과 명동에서 끝납니다. 북촌·서순라길·청계천에서 조별 인터뷰를 진행합니다.</p>
-    <div class="chips">
-      <span>2026.11.3 화</span><span>07:40 의정부 숙소 출발</span><span>09:30 삼청동길</span><span>도보 약 6.5km</span><span>조별 인터뷰 3회</span><span>18:00 남산예장공원 승차</span>
+    <div class="org"><span>공주대학교 지리학과 · 2026 추계 정기학술답사</span><span>2일차 · 서울 도보답사</span></div>
+    <div class="titlerow">
+      <div>
+        <h1>서울, 도심의<br><em>켜</em>를 걷다</h1>
+        <p>조선의 궁궐 담장과 1920년대 한옥, 1960년대 메가구조물, 복원된 하천과 관광 상권까지. 북촌에서 명동까지 걸으며 시대마다 쌓인 도시의 층을 읽고, 세 곳에서 조별 인터뷰를 합니다.</p>
+      </div>
+      <div class="date"><div class="d">11.03</div><div class="w">TUESDAY</div><div class="k">도보 약 6.5km · 조별 인터뷰 3회</div></div>
+    </div>
+    <div class="ribbon" aria-label="하루 흐름">
+      <ol>
+        <li><b>07:40</b>의정부 숙소 출발</li>
+        <li><b>08:00</b>아침 · 우리나라 국밥 본점</li>
+        <li class="walk"><b>09:30</b>삼청동길 하차, 도보 시작</li>
+        <li class="walk"><b>11:30</b>자율 점심 (~12:30)</li>
+        <li class="walk"><b>18:00</b>남산예장공원 버스 승차</li>
+        <li><b>19:30</b>저녁 · 김가네김치두루치기</li>
+        <li><b>20:30</b>파주골든힐호텔</li>
+      </ol>
     </div>
   </div>
-  <svg class="wave" viewBox="0 0 1200 120" preserveAspectRatio="none" aria-hidden="true">
-    <path d="M0 70 C200 30 400 110 600 70 S1000 30 1200 70" fill="none" stroke="#fff" stroke-width="1.5" opacity=".7"/>
-    <path d="M0 85 C220 50 420 120 620 82 S1000 45 1200 88" fill="none" stroke="#fff" stroke-width="1" opacity=".45"/>
-    <path d="M0 120 L0 100 C250 80 450 125 650 98 S1000 80 1200 104 L1200 120Z" fill="#F2F4F8"/>
-  </svg>
 </header>
 
 <main class="wrap">
-  <div class="summary">
-    <div><div class="k">출발 · 아침</div><div class="v">07:40 의정부 숙소</div><div class="s">08:00 아침식사(국밥)<br>우리나라 국밥 본점</div></div>
-    <div><div class="k">답사 시작</div><div class="v">09:30 삼청동길</div><div class="s">국립현대미술관 서울관 앞</div></div>
-    <div><div class="k">점심</div><div class="v">11:30–12:30</div><div class="s">자율 점심시간<br>이후 안국역에서 출발</div></div>
-    <div><div class="k">승차 · 저녁 · 숙소</div><div class="v">18:00 남산예장공원</div><div class="s">19:30 김가네김치두루치기(고양)<br>20:30 파주골든힐호텔</div></div>
+  <div class="main">
+    <div class="mapcol">
+      <div class="mapcard">
+        <div class="seg" role="tablist" id="seg">
+          <button role="tab" data-p="all" aria-selected="true" style="--c:var(--bark)">전체<small>하루 코스</small></button>
+          <button role="tab" data-p="am" aria-selected="false" style="--c:var(--ginkgo)">오전<small>삼청동·북촌</small></button>
+          <button role="tab" data-p="pm" aria-selected="false" style="--c:var(--maple)">오후<small>낙원~청계천</small></button>
+          <button role="tab" data-p="ev" aria-selected="false" style="--c:var(--plum)">저녁<small>을지로·명동</small></button>
+        </div>
+        <div id="mapbox"><div id="map"></div><div id="maperr" hidden></div></div>
+        <div class="mapfoot">
+          <div class="stat" id="stat"></div>
+          <div class="key"><span><i style="--c:var(--ginkgo)"></i>오전</span><span><i style="--c:var(--maple)"></i>오후</span><span><i style="--c:var(--plum)"></i>저녁</span></div>
+        </div>
+        <div class="mapnote">실제 보행로(OpenStreetMap) 기준 거리이며, 걷는 시간만 셈한 값입니다. 화살표는 진행 방향입니다.</div>
+      </div>
+    </div>
+
+    <div>
+      <div class="coursehd"><h2>코스</h2><span>누르면 지도가 따라갑니다</span></div>
+      <ol class="course" id="course"></ol>
+    </div>
   </div>
 
-  <section id="route">
-    <div class="shead"><div><h2>걷는 경로</h2><p class="lead">시간대를 고르면 그 구간의 실제 보행 경로를 크게 볼 수 있습니다.</p></div><span class="src">KAKAO MAP</span></div>
-    <div class="card">
-      <div class="tabs" role="tablist" id="tabs">
-        <button role="tab" aria-selected="true" data-p="all">전체</button>
-        <button role="tab" aria-selected="false" data-p="am">오전 <small>삼청동·북촌</small></button>
-        <button role="tab" aria-selected="false" data-p="pm">오후 <small>낙원·서순라·세운·청계천</small></button>
-        <button role="tab" aria-selected="false" data-p="ev">저녁 <small>을지로·명동</small></button>
-      </div>
-      <div class="course"><div><b id="courseT">하루 코스</b><span id="courseS"></span></div><button id="fitBtn" type="button">경로 전체 보기</button></div>
-      <div id="mapbox"><div id="map"></div><div id="maperr" hidden></div></div>
-      <div class="legend"><span><i style="--c:var(--am)"></i>오전</span><span><i style="--c:var(--pm)"></i>오후</span><span><i style="--c:var(--ev)"></i>저녁</span><span><span class="pd"></span>지나가는 곳</span><span>화살표: 진행 방향</span></div>
-      <div class="mnote">거리는 OpenStreetMap 보행로 기준 실제 경로입니다. 예상 시간은 걷는 시간이며 관찰·인터뷰·점심은 별도입니다.</div>
-      <div class="stops" id="stops"></div>
-      <div class="detail" id="detail"></div>
+  <section class="sec">
+    <h2>현장에서 꼭</h2>
+    <div class="notice">
+      <div class="nt a"><b>북촌 레드존</b><span>북촌로11길 일대는 관광 방문이 10:00–17:00만 허용됩니다. 주민이 사는 골목이니 설명과 인터뷰는 골목 밖에서, 안에서는 조용히.</span></div>
+      <div class="nt b"><b>종묘 화요일 휴관</b><span>11월 3일은 화요일이라 종묘 안에는 들어갈 수 없습니다. 외대문 앞에서 외부를 보고 세운4구역 쪽을 바라봅니다.</span></div>
+      <div class="nt c"><b>세운상가 옥상 출입 금지</b><span>옥상 대신 공중보행데크에서 세운4구역을 조망합니다.</span></div>
     </div>
   </section>
 
-  <section id="schedule">
-    <h2>시간표</h2>
-    <p class="lead">11월 3일(화) 최종 일정 · 시간이 적히지 않은 지점은 순서대로 이어서 진행합니다.</p>
-    <div class="card"><div class="tt" id="tt"></div></div>
-    <div class="warnbox"><b>종묘는 매주 화요일 휴관</b>이라 외대문 앞에서 외부 관찰합니다. 세운상가는 옥상 출입이 금지되어 보행데크에서 세운4구역을 조망합니다. 북촌 레드존(북촌로11길 일대)은 관광 방문이 10:00–17:00로 제한되어 있어 10시 이후 들어갑니다.</div>
+  <section class="sec">
+    <h2>구간별 길찾기</h2>
+    <p class="lead">카카오맵 도보 길찾기가 바로 열립니다. 조별로 흩어져도 이 링크를 따라오면 됩니다.</p>
+    <div class="dirgrid" id="dir"></div>
   </section>
 
-  <section id="directions">
-    <h2>길찾기</h2>
-    <p class="lead">카카오맵 도보 길찾기가 바로 열립니다. 조별로 흩어져도 이 링크로 따라오면 됩니다.</p>
-    <div class="card">
-      <div class="dir" id="dir"></div>
-      <div class="moves">
-        <div class="mv"><b>07:40</b><span>의정부 숙소 출발 → 08:00 아침식사(국밥)<small>우리나라 국밥 본점</small></span></div>
-        <div class="mv"><b>09:30</b><span>버스 하차 · 삼청동길<small>국립현대미술관 서울관 앞</small></span></div>
-        <div class="mv"><b>18:00</b><span>남산예장공원에서 버스 승차<small>명동거리 → 명동역 → 남산예장공원</small></span></div>
-        <div class="mv"><b>19:30</b><span>저녁식사(김치두루치기) · 고양<small>김가네김치두루치기</small></span></div>
-        <div class="mv"><b>20:30</b><span>숙소 · 파주<small>파주골든힐호텔</small></span></div>
+  <section class="sec twocol">
+    <div>
+      <h2>버스 이동</h2>
+      <div class="bus">
+        <div><b>07:40</b>의정부 숙소 출발<small>08:00 아침식사(국밥) · 우리나라 국밥 본점</small></div>
+        <div><b>09:30</b>삼청동길 하차<small>국립현대미술관 서울관 앞</small></div>
+        <div><b>18:00</b>남산예장공원 승차<small>명동거리 → 명동역 → 남산예장공원</small></div>
+        <div><b>19:30</b>고양 · 저녁식사(김치두루치기)<small>김가네김치두루치기</small></div>
+        <div><b>20:30</b>파주 · 숙소<small>파주골든힐호텔</small></div>
       </div>
     </div>
-  </section>
-
-  <section id="safety">
-    <h2>현장 유의사항</h2>
-    <div class="grid2">
-      <div class="tile"><b>북촌 레드존</b><span>주민이 사는 골목입니다. 큰 소리 설명과 인터뷰는 북촌로·계동길 쪽에서, 골목 안에서는 조용히 이동합니다.</span></div>
-      <div class="tile"><b>조별 인터뷰</b><span>북촌, 서순라길, 청계천 세 곳. 상대에게 먼저 답사 목적을 밝히고, 녹음·촬영은 동의를 받은 뒤 진행합니다.</span></div>
-      <div class="tile"><b>종묘 · 세운상가</b><span>종묘는 화요일 휴관이라 외부만 봅니다. 세운상가 옥상은 출입 금지, 보행데크에서 조망합니다.</span></div>
-      <div class="tile"><b>이동</b><span>조 단위로 움직입니다. 점심 후 안국역 출발, 18:00 남산예장공원 승차 전 인원을 확인합니다.</span></div>
+    <div>
+      <h2>챙길 것</h2>
+      <p class="lead">챙긴 것은 눌러서 지우세요. 이 기기에만 저장됩니다.</p>
+      <div class="tags" id="check"></div>
     </div>
   </section>
-
-  <section id="checklist">
-    <h2>출발 전 확인</h2>
-    <p class="lead">누르면 지워집니다. 이 기기에만 저장됩니다.</p>
-    <div class="card"><ul class="check" id="check"></ul></div>
-  </section>
-
-  <footer>
-    공주대학교 지리학과 답사부 · 2026 추계 정기학술답사 2일차(11월 3일 화) 서울 도보답사.<br>
-    지도 © Kakao · 도보 경로 데이터 © OpenStreetMap 기여자. 현장 상황에 따라 일정이 바뀔 수 있습니다.
-  </footer>
 </main>
+<footer><div class="wrap"><span>공주대학교 지리학과 답사부 · 2026 추계 정기학술답사 2일차 (11월 3일 화)</span><span>지도 © Kakao · 도보 경로 © OpenStreetMap 기여자 · 현장 상황에 따라 바뀔 수 있음</span></div></footer>
 <script>
 const P={"a1":[[37.57931,126.98059],[37.57927,126.98078],[37.5792,126.98112],[37.57919,126.98116],[37.57919,126.98131],[37.57917,126.98153],[37.57917,126.98159],[37.57976,126.9817],[37.5797,126.98189],[37.57966,126.98198],[37.57959,126.98225],[37.57963,126.98239],[37.57964,126.9829],[37.57984,126.98286],[37.57985,126.98294],[37.57984,126.98286],[37.57964,126.9829],[37.57963,126.98239],[37.57959,126.98225],[37.57993,126.98237],[37.58032,126.98254],[37.58035,126.98243],[37.58055,126.98247],[37.58058,126.9822],[37.58082,126.98216],[37.58093,126.98221],[37.58107,126.98217],[37.58115,126.98221],[37.58143,126.98224],[37.58167,126.98217],[37.58175,126.98216],[37.58187,126.98216],[37.58208,126.98216],[37.58207,126.98249],[37.58205,126.98283],[37.58207,126.98311],[37.58211,126.98326],[37.58221,126.98362],[37.58233,126.98355],[37.58235,126.98359],[37.58245,126.98373],[37.58251,126.9837],[37.58254,126.98369]],"i2":[[37.58254,126.98369],[37.58251,126.9837],[37.58245,126.98373],[37.58235,126.98359],[37.58233,126.98355],[37.58221,126.98362],[37.58204,126.9838],[37.58186,126.98433],[37.58181,126.98444],[37.58173,126.98452],[37.58152,126.98463],[37.58148,126.98468],[37.58147,126.98475],[37.58146,126.98507],[37.58126,126.98507],[37.58126,126.98553],[37.581,126.98554],[37.58102,126.98622],[37.58097,126.98636],[37.58091,126.98648],[37.58089,126.98679],[37.58059,126.98677]],"a_lunch":[[37.58059,126.98677],[37.58045,126.98676],[37.58037,126.98675],[37.58024,126.98674],[37.57989,126.98672],[37.57962,126.98673],[37.57934,126.98672],[37.57907,126.98672],[37.57827,126.98674],[37.57791,126.98676],[37.57765,126.98677],[37.57743,126.98681],[37.57732,126.98683],[37.57715,126.98689],[37.57691,126.98635],[37.57689,126.98631]],"a3":[[37.57689,126.98631],[37.57684,126.9862],[37.57668,126.98621],[37.57647,126.98625],[37.57601,126.98642],[37.57587,126.98647],[37.57574,126.98652],[37.57557,126.98658],[37.57511,126.98676],[37.5746,126.987],[37.57429,126.98716],[37.57352,126.98762],[37.57345,126.98767],[37.57316,126.98781],[37.57308,126.98784],[37.57298,126.98786],[37.57288,126.98786],[37.57272,126.98784],[37.57267,126.98783]],"a4":[[37.57267,126.98783],[37.57258,126.98781],[37.57257,126.98789],[37.57255,126.98843],[37.57255,126.98852],[37.57254,126.98871],[37.57256,126.98951],[37.57279,126.9895],[37.57285,126.98954],[37.57285,126.98958],[37.57288,126.98978],[37.57291,126.98992],[37.57296,126.99016],[37.57298,126.99017],[37.57313,126.99017],[37.5734,126.99017]],"a5":[[37.5734,126.99017],[37.57313,126.99017],[37.57321,126.99059],[37.57331,126.99076],[37.57336,126.99083],[37.57344,126.991],[37.57364,126.99094],[37.57367,126.99093],[37.5738,126.99088],[37.57386,126.99116],[37.57416,126.99107],[37.57419,126.99134],[37.57422,126.99157],[37.57429,126.99221]],"i5":[[37.57429,126.99221],[37.57403,126.99243],[37.57377,126.99257],[37.57347,126.99274],[37.57292,126.99313]],"a6":[[37.57292,126.99313],[37.57257,126.99344],[37.57236,126.99361],[37.57216,126.99379],[37.5721,126.99385],[37.57209,126.99384],[37.57204,126.99407],[37.57203,126.9946]],"a7":[[37.57203,126.9946],[37.57202,126.99462],[37.57207,126.99474],[37.57185,126.99484],[37.57184,126.99484],[37.5715,126.99501],[37.57148,126.99502],[37.57127,126.99511],[37.57103,126.99517],[37.57102,126.99517],[37.57096,126.99518],[37.57095,126.99506],[37.57094,126.99506],[37.57087,126.99507],[37.57086,126.99507],[37.57076,126.99509],[37.57067,126.99508],[37.57063,126.99508],[37.57058,126.99508],[37.57054,126.99508],[37.5705,126.99508],[37.57046,126.99509],[37.56984,126.99521],[37.56971,126.99523]],"a8":[[37.56971,126.99523],[37.56967,126.99523],[37.56966,126.99506],[37.56959,126.99507],[37.56941,126.99508],[37.56883,126.99511],[37.56863,126.99513]],"a9":[[37.56863,126.99513],[37.56862,126.99511],[37.5686,126.99507],[37.56856,126.99508],[37.56855,126.99496],[37.56852,126.99455],[37.56843,126.99339],[37.56843,126.99331],[37.56841,126.99307],[37.56837,126.99308],[37.56833,126.99308],[37.5683,126.99278],[37.5682,126.99264],[37.56818,126.99244],[37.56777,126.99248],[37.56745,126.99252],[37.56692,126.99257],[37.56689,126.99194],[37.5671,126.99192]],"a10":[[37.5671,126.99192],[37.56689,126.99194],[37.56682,126.99085],[37.56679,126.99044],[37.56679,126.99034],[37.56676,126.98966],[37.56672,126.98869],[37.56672,126.9884],[37.56666,126.98766],[37.56641,126.98767],[37.56622,126.9877],[37.56622,126.98751],[37.56621,126.98734],[37.56607,126.98735],[37.56607,126.98724],[37.56604,126.98589],[37.56603,126.98547],[37.56602,126.9841],[37.56567,126.98413],[37.56566,126.98413],[37.56543,126.98419],[37.5652,126.98424],[37.56498,126.98447],[37.56468,126.9848],[37.56385,126.98511],[37.56397,126.98576],[37.56406,126.98601],[37.56409,126.98608],[37.56419,126.98634],[37.56426,126.98649],[37.5643,126.98656],[37.56408,126.98671],[37.56404,126.98674],[37.56397,126.98679],[37.56396,126.9868],[37.5639,126.98683],[37.56377,126.98692],[37.56353,126.98714],[37.56361,126.98733],[37.56353,126.98739],[37.56352,126.98736],[37.5634,126.98745]],"a11":[[37.5634,126.98745],[37.56352,126.98736],[37.56353,126.98739],[37.56361,126.98733],[37.56353,126.98714],[37.56377,126.98692],[37.5639,126.98683],[37.56396,126.9868],[37.56397,126.98679],[37.56404,126.98674],[37.56408,126.98671],[37.5643,126.98656],[37.56426,126.98649],[37.56419,126.98634],[37.56409,126.98608],[37.56406,126.98601],[37.56397,126.98576],[37.56385,126.98511],[37.56379,126.98461]],"a12":[[37.56379,126.98461],[37.56385,126.98511],[37.56339,126.98525],[37.56325,126.98529],[37.56291,126.98539],[37.56281,126.98542],[37.5621,126.98564],[37.56165,126.98587],[37.56094,126.986],[37.56098,126.9863],[37.56091,126.98633],[37.56087,126.98634],[37.56092,126.98669],[37.56094,126.98682],[37.56094,126.98686],[37.561,126.98754],[37.561,126.98764],[37.561,126.9877],[37.56099,126.98778],[37.56098,126.98784],[37.56098,126.98791],[37.56098,126.98797],[37.56097,126.98802],[37.56096,126.98807],[37.56094,126.98816],[37.56089,126.98825],[37.56083,126.98833],[37.56078,126.98839],[37.56075,126.98842],[37.56072,126.98844],[37.56067,126.98847],[37.56048,126.9886],[37.56042,126.98865],[37.56034,126.98871],[37.56028,126.98878],[37.56024,126.98883],[37.55997,126.98892],[37.5599,126.98896]]};
 
 const KAKAO_JS_KEY="b53aa9a5eaca12abca83f43a6ced2a3f";
-const PC={am:"#2563EB",pm:"#0F8A5F",ev:"#E0592A"};
-const PN={all:"하루 코스",am:"오전 · 삼청동·북촌",pm:"오후 · 낙원·서순라·세운·청계천",ev:"저녁 · 을지로·명동"};
-// 지점 (최종 일정표 2일차 순서)
+const PC={am:"#C98A0B",pm:"#B5361E",ev:"#6B3460"};
+const PN={all:"하루 코스",am:"오전",pm:"오후",ev:"저녁"};
+// 지점 — 최종 일정표 2일차 순서
 const S=[
- {n:1,p:"am",name:"삼청동길",sub:"국립현대미술관 서울관 앞",time:"09:30",lat:37.57883,lng:126.98043,
-  desc:"버스 하차 후 인원 확인. 삼청동길 상권 관찰."},
- {n:2,p:"am",name:"북촌 한옥마을",sub:"가회동, 계동길",time:"10:00",lat:37.58254,lng:126.98369,path:"a1",inside:"i2",
-  route:"북촌로5길 → 북촌로11길",tags:[["조별 인터뷰","iv"]],
-  desc:"레드존(가회동 북촌로11길 일대) 관찰 후 계동길로."},
- {n:3,p:"pm",name:"낙원악기상가",sub:"",time:"",lat:37.57267,lng:126.98783,path:"a3",
-  route:"안국역 → 삼일대로 → 낙원악기상가",desc:"도로 위 주상복합, 상가 하부 통로."},
- {n:4,p:"pm",name:"익선동 한옥거리",sub:"",time:"",lat:37.5734,lng:126.99017,path:"a4",
-  route:"낙원악기상가 → 익선동",desc:"한옥 상업화, 업종·외관 관찰."},
- {n:5,p:"pm",name:"서순라길",sub:"종묘 담장길",time:"13:45",lat:37.57429,lng:126.99221,path:"a5",inside:"i5",
-  route:"익선동 → 돈화문로 → 서순라길",tags:[["조별 인터뷰","iv"]],desc:"종묘 담장길 답사."},
- {n:6,p:"pm",name:"종묘",sub:"외대문 앞",time:"",lat:37.57203,lng:126.9946,path:"a6",
-  route:"서순라길 → 종묘 외대문",tags:[["화요일 휴관","warn"]],desc:"화요일 휴관으로 외부 관찰, 세운4구역 조망."},
- {n:7,p:"pm",name:"세운상가",sub:"보행데크",time:"",lat:37.56971,lng:126.99523,path:"a7",
-  route:"종묘시민광장 → 세운상가",tags:[["옥상 출입 금지","warn"]],desc:"도심 제조업. 옥상 출입 금지라 보행데크에서 세운4구역 조망."},
- {n:8,p:"pm",name:"청계천",sub:"",time:"",lat:37.56863,lng:126.99513,path:"a8",
-  route:"세운상가 → 청계천",tags:[["조별 인터뷰 예정","iv"]],desc:""},
- {n:9,p:"ev",name:"을지로 골목",sub:"노가리골목 · 골뱅이골목",time:"",lat:37.5671,lng:126.99192,path:"a9",
-  route:"청계천 → 을지로 노가리골목 → 을지로입구 골뱅이골목",desc:"을지로 골목은 걸으며 관찰."},
+ {n:1,p:"am",name:"삼청동길",sub:"국립현대미술관 서울관 앞",time:"09:30~",lat:37.57883,lng:126.98043,desc:"버스 하차 후 인원 확인. 삼청동길 상권 관찰."},
+ {n:2,p:"am",name:"북촌 한옥마을",sub:"가회동 · 계동길",time:"10:00~",lat:37.58254,lng:126.98369,path:"a1",inside:"i2",route:"북촌로5길 → 북촌로11길",desc:"레드존(가회동 북촌로11길 일대) 관찰 후 계동길로."},
+ {n:3,p:"pm",name:"낙원악기상가",sub:"",time:"",lat:37.57267,lng:126.98783,path:"a3",route:"안국역 → 삼일대로 → 낙원악기상가",desc:"도로 위 주상복합, 상가 하부 통로."},
+ {n:4,p:"pm",name:"익선동 한옥거리",sub:"",time:"",lat:37.5734,lng:126.99017,path:"a4",route:"낙원악기상가 → 익선동",desc:"한옥 상업화, 업종·외관 관찰."},
+ {n:5,p:"pm",name:"서순라길",sub:"종묘 담장길",time:"13:45~",lat:37.57429,lng:126.99221,path:"a5",inside:"i5",route:"익선동 → 돈화문로 → 서순라길",desc:"종묘 담장길 답사."},
+ {n:6,p:"pm",name:"종묘",sub:"외대문 앞",time:"",lat:37.57203,lng:126.9946,path:"a6",route:"서순라길 → 종묘 외대문",badge:["화요일 휴관","b-warn"],desc:"외부 관찰, 세운4구역 조망."},
+ {n:7,p:"pm",name:"세운상가",sub:"공중보행데크",time:"",lat:37.56971,lng:126.99523,path:"a7",route:"종묘시민광장 → 세운상가",badge:["옥상 출입 금지","b-warn"],desc:"도심 제조업. 보행데크에서 세운4구역 조망."},
+ {n:8,p:"pm",name:"청계천",sub:"",time:"",lat:37.56863,lng:126.99513,path:"a8",route:"세운상가 → 청계천",desc:""},
+ {n:9,p:"ev",name:"을지로 골목",sub:"노가리골목 · 골뱅이골목",time:"",lat:37.5671,lng:126.99192,path:"a9",route:"청계천 → 을지로 노가리골목 → 을지로입구 골뱅이골목",desc:"을지로 골목은 걸으며 관찰."},
  {n:10,p:"ev",name:"명동성당",sub:"",time:"",lat:37.5634,lng:126.98745,path:"a10",route:"골뱅이골목 → 명동성당",desc:""},
- {n:11,p:"ev",name:"명동거리",sub:"라인프렌즈 스퀘어 일대",time:"",lat:37.56379,lng:126.98461,path:"a11",
-  route:"명동성당 → 명동거리",desc:"상권 관찰, 간판 언어·굿즈 매장."},
- {n:12,p:"ev",name:"남산예장공원",sub:"버스 승차",time:"18:00",lat:37.5599,lng:126.98896,path:"a12",
-  route:"명동거리 → 명동역 → 남산예장공원",tags:[["버스 승차","bus"]],desc:"남산예장공원에서 버스 승차."}
+ {n:11,p:"ev",name:"명동거리",sub:"라인프렌즈 스퀘어 일대",time:"",lat:37.56379,lng:126.98461,path:"a11",route:"명동성당 → 명동거리",desc:"상권 관찰, 간판 언어·굿즈 매장."},
+ {n:12,p:"ev",name:"남산예장공원",sub:"버스 승차",time:"18:00",lat:37.5599,lng:126.98896,path:"a12",route:"명동거리 → 명동역 → 남산예장공원",badge:["버스 승차","b-bus"],desc:""}
 ];
+// 코스 목록 순서 (일정표 행 순서 그대로)
+const ORDER=[1,2,{iv:"북촌 한옥마을 조별 인터뷰 진행",p:"am"},{meal:"자율 점심시간",t:"11:30–12:30",note:"점심 후 안국역에서 출발",p:"am"},3,4,5,{iv:"서순라길 조별 인터뷰 진행",p:"pm"},6,7,8,{iv:"청계천 조별 인터뷰 진행 예정",p:"pm"},9,10,11,12];
 const PASS=[["북촌로5길",37.57985,126.98294,"am"],["계동길",37.58059,126.98677,"am"],["안국역",37.57689,126.98631,"am"],["종묘시민광장",37.57148,126.99502,"pm"],["골뱅이골목",37.56567,126.98413,"ev"],["명동역",37.56091,126.98633,"ev"]];
-// 시간표 (최종 일정표 행 순서)
-const TT=[
- {t:"07:40",k:"bus",h:"의정부 숙소에서 출발",r:"",minor:true},
- {t:"08:00",k:"meal",h:"아침식사(국밥)",tag:["의정부","meal"],r:"우리나라 국밥 본점",minor:true},
- {t:"09:30~",s:1},
- {t:"10:00~",s:2},
- {t:"",h:"북촌 한옥마을 조별 인터뷰 진행",tag:["조별 인터뷰","iv"],minor:true,c:"am"},
- {t:"11:30–12:30",k:"meal",h:"자율 점심시간",tag:["자율","meal"],r:"점심 후 안국역에서 출발",minor:true},
- {t:"",s:3},{t:"",s:4},
- {t:"13:45~",s:5},
- {t:"",h:"서순라길 조별 인터뷰 진행",tag:["조별 인터뷰","iv"],minor:true,c:"pm"},
- {t:"",s:6},{t:"",s:7},{t:"",s:8},
- {t:"",h:"청계천 조별 인터뷰 진행 예정",tag:["조별 인터뷰","iv"],minor:true,c:"pm"},
- {t:"",s:9},{t:"",s:10},{t:"",s:11},
- {t:"18:00",s:12},
- {t:"19:30",k:"meal",h:"저녁식사(김치두루치기)",tag:["고양","meal"],r:"김가네김치두루치기",minor:true},
- {t:"20:30",k:"bus",h:"숙소",tag:["파주","bus"],r:"파주골든힐호텔",minor:true}
-];
-const CHECK=["조별 인터뷰 질문지와 역할 분담(북촌·서순라길·청계천)","편한 운동화 (하루 도보 약 6.5km)","겉옷 — 11월 초, 저녁은 쌀쌀하다","보조배터리·사진 저장공간","학생증","우리 조 번호와 조장 이름 확인","18:00 남산예장공원 승차 시각 확인"];
-const KEY="dapsa-2026-day2-check";
+const CHECK=["조별 인터뷰 질문지","역할 분담 (질문·기록·사진)","편한 운동화","겉옷","보조배터리","학생증","우리 조 번호·조장 확인","18:00 승차 시각"];
+const KEY="dapsa-2026-day2-pack";
+const LEAF='<svg class="leaf" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2c3 4 8 5 8 11a8 8 0 0 1-16 0c0-6 5-7 8-11z" fill="currentColor"/><path d="M12 6v16" stroke="#fff" stroke-width="1.3"/></svg>';
 
 function len(l){let d=0;for(let i=1;i<l.length;i++){const a=l[i-1],b=l[i],x=(b[1]-a[1])*Math.PI/180*Math.cos((a[0]+b[0])/2*Math.PI/180),y=(b[0]-a[0])*Math.PI/180;d+=6371000*Math.hypot(x,y);}return d;}
-const legsOf=p=>{const ks=[];S.forEach(s=>{if(p==='all'||s.p===p){if(s.path)ks.push(s.path);if(s.inside)ks.push(s.inside);}});if(p==='all'||p==='am')ks.push('a_lunch');return ks;};
-const meters=p=>legsOf(p).reduce((a,k)=>a+len(P[k]),0);
-const fmt=m=>{const km=(m/1000).toFixed(1),min=Math.round(m/1000*15);return `도보 ${km} km · 걷는 시간 약 ${min>=60?Math.floor(min/60)+'시간 '+(min%60)+'분':min+'분'}`};
+const keysOf=p=>{const ks=[];S.forEach(s=>{if(p==='all'||s.p===p){s.path&&ks.push(s.path);s.inside&&ks.push(s.inside);}});if(p==='all'||p==='am')ks.push('a_lunch');return ks;};
+const meters=p=>keysOf(p).reduce((a,k)=>a+len(P[k]),0);
 
-/* 시간표 */
-const tt=document.getElementById('tt');
-TT.forEach(r=>{const d=document.createElement('div');
-  if(r.s){const s=S[r.s-1];d.className='ti';d.style.setProperty('--c',PC[s.p]);
-    d.innerHTML=`<div class="tm${r.t?'':' none'}">${r.t||'이어서'}</div><div><h4><span class="n" style="--c:${PC[s.p]}">${s.n}</span>${s.name}${s.sub?` <span style="font-weight:500;color:var(--muted);font-size:13.5px">${s.sub}</span>`:''}${(s.tags||[]).map(t=>`<span class="tag ${t[1]}">${t[0]}</span>`).join('')}</h4>${s.desc?`<p>${s.desc}</p>`:''}${s.route?`<div class="route">이동 경로 · ${s.route}</div>`:''}</div>`;
-    d.style.cursor='pointer';d.addEventListener('click',()=>{pick(s.n);document.getElementById('route').scrollIntoView({behavior:'smooth'});});}
-  else{d.className='ti minor';d.style.setProperty('--c',r.k==='bus'?'var(--bus)':r.k==='meal'?'#9A6400':PC[r.c]);
-    d.innerHTML=`<div class="tm${r.t?'':' none'}">${r.t||'이어서'}</div><div><h4>${r.h}${r.tag?`<span class="tag ${r.tag[1]}">${r.tag[0]}</span>`:''}</h4>${r.r?`<div class="route">${r.r}</div>`:''}</div>`;}
-  tt.appendChild(d);});
+/* 코스 목록 */
+const course=document.getElementById('course');const items={};
+ORDER.forEach(o=>{const li=document.createElement('li');
+  if(typeof o==='number'){const s=S[o-1];li.className='st';li.style.setProperty('--c',PC[s.p]);
+    const wm=s.path?`<span class="walkm">${Math.round(len(P[s.path])/10)*10}m</span>`:'';
+    li.innerHTML=`<div class="pin">${s.n}</div><div class="body" tabindex="0" role="button" aria-label="${s.n}. ${s.name} 지도에서 보기">
+      <div class="tm${s.time?'':' soft'}">${s.time||'이어서'}</div>
+      <h3>${s.name}${s.sub?`<span class="sub">${s.sub}</span>`:''}${s.badge?`<span class="badge ${s.badge[1]}">${s.badge[0]}</span>`:''}</h3>
+      ${s.desc?`<p>${s.desc}</p>`:''}
+      ${s.route?`<div class="via">${s.route}${wm}</div>`:''}
+      <div class="acts"><a href="https://map.kakao.com/link/map/${encodeURIComponent(s.name)},${s.lat},${s.lng}" target="_blank" rel="noopener">카카오맵</a><a href="https://map.kakao.com/link/to/${encodeURIComponent(s.name)},${s.lat},${s.lng}" target="_blank" rel="noopener">여기로 길찾기</a></div></div>`;
+    const b=li.querySelector('.body');b.addEventListener('click',e=>{if(e.target.tagName!=='A')pick(s.n,false)});b.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();pick(s.n,false)}});items[s.n]=li;}
+  else if(o.iv){li.className='mid';li.style.setProperty('--c','#2E5E4A');li.innerHTML=`<div class="dot"></div><div class="txt">${LEAF}${o.iv}<span class="badge b-iv">조별 인터뷰</span></div>`;}
+  else{li.className='mid';li.style.setProperty('--c','#C98A0B');li.innerHTML=`<div class="dot"></div><div class="txt">${o.t} ${o.meal}<small>${o.note}</small></div>`;}
+  course.appendChild(li);});
 
-/* 길찾기 링크 */
-const dir=document.getElementById('dir');
+/* 길찾기 */
 const wl=(a,b)=>`https://map.kakao.com/link/by/walk/${encodeURIComponent(a.name)},${a.lat},${a.lng}/${encodeURIComponent(b.name)},${b.lat},${b.lng}`;
 const anguk={name:"안국역",lat:37.57689,lng:126.98631};
-[["오전 · 삼청동길 → 북촌",S[0],S[1],"am"],["북촌 → 안국역",S[1],anguk,"am"],["점심 후 · 안국역 → 낙원악기상가",anguk,S[2],"pm"],["낙원악기상가 → 익선동",S[2],S[3],"pm"],["익선동 → 서순라길",S[3],S[4],"pm"],["서순라길 → 종묘 외대문",S[4],S[5],"pm"],["종묘 → 세운상가",S[5],S[6],"pm"],["세운상가 → 청계천",S[6],S[7],"pm"],["청계천 → 을지로 골목",S[7],S[8],"ev"],["을지로 → 명동성당",S[8],S[9],"ev"],["명동성당 → 명동거리",S[9],S[10],"ev"],["명동거리 → 남산예장공원",S[10],S[11],"ev"]]
- .forEach(([t,a,b,p])=>{const x=document.createElement('a');x.href=wl(a,b);x.target='_blank';x.rel='noopener';x.style.setProperty('--c',PC[p]);x.innerHTML=`<i></i>${t}`;dir.appendChild(x);});
+const dir=document.getElementById('dir');
+[[S[0],S[1],"am","1→2"],[S[1],anguk,"am","2→점심"],[anguk,S[2],"pm","점심→3"],[S[2],S[3],"pm","3→4"],[S[3],S[4],"pm","4→5"],[S[4],S[5],"pm","5→6"],[S[5],S[6],"pm","6→7"],[S[6],S[7],"pm","7→8"],[S[7],S[8],"ev","8→9"],[S[8],S[9],"ev","9→10"],[S[9],S[10],"ev","10→11"],[S[10],S[11],"ev","11→12"]]
+ .forEach(([a,b,p,k])=>{const x=document.createElement('a');x.href=wl(a,b);x.target='_blank';x.rel='noopener';x.style.setProperty('--c',PC[p]);
+   x.innerHTML=`<span class="k">${k.split('→')[1]==='점심'?'점':k.split('→')[1]}</span>${a.name} → ${b.name}<em>도보 ↗</em>`;dir.appendChild(x);});
 
-/* 체크리스트 */
+/* 챙길 것 */
 let done={};try{done=JSON.parse(localStorage.getItem(KEY)||'{}')}catch(e){}
 const ck=document.getElementById('check');
-CHECK.forEach((c,i)=>{const li=document.createElement('li');if(done[i])li.classList.add('done');
-  li.innerHTML=`<button type="button" aria-pressed="${!!done[i]}"><span class="box"></span><span class="txt">${c}</span></button>`;
-  li.querySelector('button').addEventListener('click',e=>{done[i]=!done[i];li.classList.toggle('done',done[i]);e.currentTarget.setAttribute('aria-pressed',done[i]);try{localStorage.setItem(KEY,JSON.stringify(done))}catch(_){}});
-  ck.appendChild(li);});
+CHECK.forEach((c,i)=>{const b=document.createElement('button');b.type='button';b.textContent=c;b.setAttribute('aria-pressed',!!done[i]);
+  b.addEventListener('click',()=>{done[i]=!done[i];b.setAttribute('aria-pressed',done[i]);try{localStorage.setItem(KEY,JSON.stringify(done))}catch(_){}});ck.appendChild(b);});
 
-/* 지점 칩 + 상세 */
-const stopsEl=document.getElementById('stops'),detail=document.getElementById('detail');const chips={};
-S.forEach(s=>{const b=document.createElement('button');b.type='button';b.style.setProperty('--c',PC[s.p]);b.setAttribute('aria-pressed','false');
-  b.innerHTML=`<span class="n">${s.n}</span>${s.name}`;b.addEventListener('click',()=>pick(s.n));stopsEl.appendChild(b);chips[s.n]=b;});
-let cur=null,map=null,K=null,mk={},lines=[],bounds={};
-function pick(n){const s=S[n-1];
-  if(cur){chips[cur].setAttribute('aria-pressed','false');mk[cur]&&mk[cur].classList.remove('on');}
-  cur=n;chips[n].setAttribute('aria-pressed','true');chips[n].scrollIntoView({block:'nearest',inline:'center',behavior:'smooth'});mk[n]&&mk[n].classList.add('on');
-  detail.innerHTML=`<h3>${s.n}. ${s.name}${s.sub?' · '+s.sub:''}${s.time?' · '+s.time:''}</h3><p>${s.desc||''}${s.route?`<br><span style="color:var(--faint);font-size:13px">이동 경로 · ${s.route}</span>`:''}</p><a href="https://map.kakao.com/link/map/${encodeURIComponent(s.name)},${s.lat},${s.lng}" target="_blank" rel="noopener">카카오지도에서 보기 ↗</a>`;
-  if(map){map.setLevel(Math.min(map.getLevel(),4));map.panTo(new K.LatLng(s.lat,s.lng));}}
-pick(1);
-
-/* 탭 */
-let period='all';
-function setPeriod(p){period=p;document.querySelectorAll('#tabs button').forEach(b=>b.setAttribute('aria-selected',b.dataset.p===p));
-  document.getElementById('courseT').textContent=PN[p];document.getElementById('courseS').textContent=fmt(meters(p));
-  if(map){lines.forEach(o=>o.ln.setOptions({strokeOpacity:(p==='all'||o.p===p)?1:.18}));map.setBounds(bounds[p],50,50,50,50);}}
-document.querySelectorAll('#tabs button').forEach(b=>b.addEventListener('click',()=>setPeriod(b.dataset.p)));
-document.getElementById('fitBtn').addEventListener('click',()=>setPeriod('all'));
+/* 탭 + 지도 */
+let map=null,K=null,mk={},lines=[],bounds={},cur=null,period='all';
+function setPeriod(p){period=p;document.querySelectorAll('#seg button').forEach(b=>b.setAttribute('aria-selected',b.dataset.p===p));
+  const m=meters(p),min=Math.round(m/1000*15);
+  document.getElementById('stat').innerHTML=`${(m/1000).toFixed(1)} km<small>${PN[p]} · 걷는 시간 약 ${min>=60?Math.floor(min/60)+'시간 '+(min%60)+'분':min+'분'}</small>`;
+  if(map){lines.forEach(o=>o.ln.setOptions({strokeOpacity:(p==='all'||o.p===p)?1:.15}));map.setBounds(bounds[p],50,50,50,50);}}
+document.querySelectorAll('#seg button').forEach(b=>b.addEventListener('click',()=>setPeriod(b.dataset.p)));
+function pick(n,fromMap){if(cur){items[cur].classList.remove('on');mk[cur]&&mk[cur].classList.remove('on');}
+  cur=n;items[n].classList.add('on');mk[n]&&mk[n].classList.add('on');
+  const s=S[n-1];if(map){map.setLevel(Math.min(map.getLevel(),4));map.panTo(new K.LatLng(s.lat,s.lng));}
+  if(fromMap)items[n].scrollIntoView({behavior:'smooth',block:'center'});
+  else if(window.innerWidth<=960)document.getElementById('mapbox').scrollIntoView({behavior:'smooth',block:'center'});}
 setPeriod('all');
 
-/* 지도 */
 function err(msg){const e=document.getElementById('maperr');e.hidden=false;e.innerHTML=msg;}
 function init(){
   K=kakao.maps;const LL=(a,b)=>new K.LatLng(a,b);
@@ -321,22 +317,33 @@ function init(){
   map.addControl(new K.MapTypeControl(),K.ControlPosition.TOPRIGHT);
   ['all','am','pm','ev'].forEach(p=>bounds[p]=new K.LatLngBounds());
   const add=(key,p,inside)=>{const path=P[key].map(q=>LL(q[0],q[1]));path.forEach(q=>{bounds.all.extend(q);bounds[p].extend(q);});
-    new K.Polyline({map,path,strokeWeight:inside?7:9,strokeColor:'#fff',strokeOpacity:.9,zIndex:1});
+    new K.Polyline({map,path,strokeWeight:inside?7:10,strokeColor:'#FFFDF9',strokeOpacity:.95,zIndex:1});
     const ln=new K.Polyline({map,path,strokeWeight:inside?3:5,strokeColor:PC[p],strokeOpacity:1,strokeStyle:inside?'shortdot':'solid',endArrow:true,zIndex:2});lines.push({ln,p});};
-  S.forEach(s=>{if(s.path)add(s.path,s.p,false);if(s.inside)add(s.inside,s.p,true);});
+  S.forEach(s=>{s.path&&add(s.path,s.p,false);s.inside&&add(s.inside,s.p,true);bounds[s.p].extend(LL(s.lat,s.lng));});
   add('a_lunch','am',false);
-  S.forEach(s=>{bounds[s.p].extend(LL(s.lat,s.lng));});
   PASS.forEach(([n,a,b,p])=>{const w=document.createElement('div');w.className='pk';w.style.setProperty('--c',PC[p]);w.innerHTML=`<div class="d"></div><div class="lb">${n}</div>`;
     new K.CustomOverlay({map,position:LL(a,b),content:w,yAnchor:.15,zIndex:3});});
-  S.forEach(s=>{const w=document.createElement('div');w.className='mk';w.style.setProperty('--c',PC[s.p]);w.innerHTML=`<div class="dot">${s.n}</div><div class="lb">${s.name}</div>`;
-    w.addEventListener('click',()=>pick(s.n));new K.CustomOverlay({map,position:LL(s.lat,s.lng),content:w,yAnchor:.25,zIndex:4});mk[s.n]=w;});
-  mk[cur]&&mk[cur].classList.add('on');
+  S.forEach(s=>{const w=document.createElement('div');w.className='mk';w.style.setProperty('--c',PC[s.p]);w.innerHTML=`<div class="p">${s.n}</div><div class="lb">${s.name}</div>`;
+    w.addEventListener('click',()=>pick(s.n,true));new K.CustomOverlay({map,position:LL(s.lat,s.lng),content:w,yAnchor:.25,zIndex:4});mk[s.n]=w;});
   setPeriod(period);
 }
 if(location.protocol==='file:')err('파일을 더블클릭해서 열면 지도가 뜨지 않습니다.<br>https://suho-cloud.github.io/seoul-dapsa/ 주소로 여세요.');
 else{const sc=document.createElement('script');sc.src=`https://dapi.kakao.com/v2/maps/sdk.js?appkey=${KAKAO_JS_KEY}&autoload=false`;
   sc.onload=()=>{try{kakao.maps.load(init)}catch(e){err('카카오 지도를 불러오지 못했습니다.')}};
   sc.onerror=()=>err('카카오 지도를 불러오지 못했습니다.<br>카카오 디벨로퍼스의 도메인 등록을 확인하세요.');document.head.appendChild(sc);}
+
+/* 머리 부분 낙엽 (움직임 줄이기 설정이면 멈춘 그림) */
+(function(){const c=document.getElementById('leaves');if(!c)return;const x=c.getContext('2d');
+  const still=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const cols=['#C98A0B','#E0A21A','#B5361E','#D2582A','#8C3B1E'];let W,H,L=[];
+  function size(){const r=c.getBoundingClientRect(),d=devicePixelRatio||1;W=r.width;H=r.height;c.width=W*d;c.height=H*d;x.setTransform(d,0,0,d,0,0);}
+  function seed(){L=Array.from({length:Math.round(W/55)},()=>({x:Math.random()*W,y:Math.random()*H,s:6+Math.random()*9,r:Math.random()*6.28,vr:(Math.random()-.5)*.02,vy:.25+Math.random()*.45,sw:Math.random()*6.28,c:cols[Math.random()*cols.length|0],g:Math.random()<.5}));}
+  function leaf(l){x.save();x.translate(l.x,l.y);x.rotate(l.r);x.globalAlpha=.32;x.fillStyle=l.c;x.beginPath();
+    if(l.g){x.moveTo(0,l.s*.2);x.arc(0,l.s*.2,l.s,Math.PI*1.15,Math.PI*1.85);x.closePath();}
+    else{for(let i=0;i<5;i++){const a=-Math.PI/2+i*Math.PI*2/5;x.lineTo(Math.cos(a)*l.s,Math.sin(a)*l.s);const b=a+Math.PI/5;x.lineTo(Math.cos(b)*l.s*.42,Math.sin(b)*l.s*.42);}x.closePath();}
+    x.fill();x.restore();}
+  function frame(){x.clearRect(0,0,W,H);L.forEach(l=>{if(!still){l.y+=l.vy;l.sw+=.01;l.x+=Math.sin(l.sw)*.35;l.r+=l.vr;if(l.y>H+20){l.y=-20;l.x=Math.random()*W;}}leaf(l);});if(!still)requestAnimationFrame(frame);}
+  size();seed();frame();addEventListener('resize',()=>{size();seed();if(still)frame();});})();
 </script>
 </body>
 </html>
