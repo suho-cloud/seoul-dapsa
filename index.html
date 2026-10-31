@@ -2,199 +2,341 @@
 <html lang="ko">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>2일차 서울 도보답사 지도</title>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@800&family=IBM+Plex+Sans+KR:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#0B1633">
+<title>서울 도보답사 2026 — 공주대 지리학과 추계 정기학술답사 2일차</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
 <style>
-:root{--ink:#1D2830;--muted:#5D6A70;--line:#D3DAD7;--paper:#FFFFFF;--bg:#F1F4F1;
-  --stay:#1D2830;--walk:#2F70B0;--lunch:#B47A1E;--bus:#A84E86;--mark:#FFE58A;
-  --f-d:"Nanum Myeongjo",serif;--f-b:"IBM Plex Sans KR","Apple SD Gothic Neo","Malgun Gothic",sans-serif;--f-m:"IBM Plex Mono",monospace}
+:root{
+  --navy:#0B1633;--navy2:#1E3A7B;--ink:#151B2B;--muted:#5C6478;--faint:#8A91A3;--line:#E3E7EF;--bg:#F2F4F8;--card:#FFFFFF;
+  --am:#2563EB;--pm:#0F8A5F;--ev:#E0592A;--bus:#7A5AF8;--warnbg:#FFF6DD;--warnline:#F2D27A;
+  --f:"Pretendard","Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
+}
 *{box-sizing:border-box}
-html,body{height:100%;margin:0}
-body{font-family:var(--f-b);color:var(--ink);background:var(--bg);font-size:14px;line-height:1.5}
-#app{display:grid;grid-template-columns:minmax(0,1fr) 440px;height:100%}
-#mapwrap{position:relative;min-height:0}
-#map{width:100%;height:100%}
-#panel{overflow-y:auto;background:var(--bg);border-left:1px solid var(--line);padding:18px 16px 40px;display:flex;flex-direction:column;gap:12px}
-@media (max-width:900px){#app{grid-template-columns:1fr;grid-template-rows:60vh auto;height:auto}#mapwrap{height:60vh}#panel{border-left:0;border-top:1px solid var(--line)}}
-.eyebrow{font-family:var(--f-m);font-size:11px;color:var(--muted);letter-spacing:.04em}
-h1{font-family:var(--f-d);font-size:24px;line-height:1.25;margin:0}
-.sub{font-size:13px;color:var(--ink);font-weight:500}
-.tl{display:flex;flex:none;min-height:22px;border-radius:4px;overflow:hidden;border:1px solid var(--line);background:#fff}
-.tl i{display:block;background:var(--c);border-right:1px solid #fff;cursor:pointer}
-.tlk{display:flex;flex-wrap:wrap;gap:4px 14px;font-size:12px;color:var(--muted)}
-.tlk span{display:inline-flex;align-items:center;gap:5px}
-.tlk b{width:12px;height:12px;border-radius:2px;background:var(--c);display:inline-block}
-.btns{display:flex;flex-wrap:wrap;gap:6px}
-.btns button{font:500 12.5px var(--f-b);padding:6px 10px;border-radius:99px;border:1px solid var(--line);background:var(--paper);color:var(--ink);cursor:pointer}
-.btns button[aria-pressed="true"]{background:var(--ink);color:#fff;border-color:var(--ink)}
-.rows{display:flex;flex-direction:column;gap:6px}
-.row{display:grid;grid-template-columns:86px minmax(0,1fr);gap:4px 10px;padding:10px 12px;border-radius:6px;cursor:pointer;border:1px solid transparent}
-.row.stay,.row.lunch,.row.bus{background:var(--paper);border-color:var(--line)}
-.row.walk{padding:6px 12px;background:transparent}
-.row.on{border-color:var(--c);box-shadow:0 0 0 2px var(--c)}
-.t{font:500 12px var(--f-m);color:var(--muted);font-variant-numeric:tabular-nums}
-.t .d{display:block;font-size:11px;color:var(--muted);margin-top:2px}
-.what{display:flex;flex-direction:column;gap:3px;min-width:0}
-.head{display:flex;align-items:center;gap:7px;flex-wrap:wrap}
-.num{width:24px;height:24px;flex:none;border-radius:50%;display:grid;place-items:center;font:600 11px var(--f-m);background:var(--c);color:#fff}
-.kind{font-size:11px;padding:0 7px;border-radius:99px;border:1px solid var(--c);color:var(--c);flex:none}
-.place{font-weight:600}
-.row.walk .place{font-weight:500;color:var(--walk);font-size:13px}
-.note{font-size:13px;color:var(--muted)}
-.note mark{background:var(--mark);color:var(--ink);padding:0 2px}
-.links{display:flex;gap:12px;font-size:12px}
-.links a{color:var(--c);font-weight:500}
-.dist{font:500 11px var(--f-m);color:var(--muted)}
-.mk{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;font:600 12.5px var(--f-m);border:2.5px solid #fff;background:var(--c);color:#fff;cursor:pointer;box-shadow:0 1px 5px rgba(0,0,0,.35)}
-.mk.on{transform:scale(1.3)}
-.mkl{font:600 12px var(--f-b);color:var(--ink);background:rgba(255,255,255,.95);padding:1px 6px;border-radius:3px;margin-top:3px;white-space:nowrap;text-align:center;box-shadow:0 0 0 1px rgba(0,0,0,.08)}
-.pk{width:13px;height:13px;border-radius:50%;background:#fff;border:2.5px dashed var(--walk);box-shadow:0 1px 3px rgba(0,0,0,.3)}
-.mkl.pl{font-weight:500;font-size:11px;color:var(--muted)}
-#err{position:absolute;inset:0;display:grid;place-items:center;background:var(--bg);padding:24px}
-#err[hidden]{display:none}
-#err div{max-width:520px;background:#fff;border:1px solid var(--line);border-radius:8px;padding:20px 22px}
-#err h2{margin:0 0 8px;font-family:var(--f-d);font-size:19px}
-#err code{font-family:var(--f-m);background:var(--bg);padding:1px 5px;border-radius:3px}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--f);font-size:15px;line-height:1.6;word-break:keep-all}
+a{color:inherit}
+.wrap{max-width:800px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left));padding-right:max(16px,env(safe-area-inset-right))}
+/* hero */
+.hero{position:relative;overflow:hidden;color:#fff;background:linear-gradient(180deg,var(--navy) 0%,#172C63 55%,#3A5BB0 100%);padding:40px 0 120px}
+.hero svg.wave{position:absolute;left:0;right:0;bottom:0;width:100%;height:120px;opacity:.55}
+.hero .eyebrow{font-size:13px;font-weight:600;color:#C9D4F3;letter-spacing:.01em}
+.hero h1{font-size:clamp(26px,5vw,34px);line-height:1.3;margin:10px 0 12px;font-weight:800;letter-spacing:-.02em}
+.hero p{margin:0;max-width:34em;color:#DCE3F7;font-size:15.5px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.chips span{font-size:13px;font-weight:600;padding:6px 12px;border-radius:99px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.22)}
+/* summary card */
+.summary{position:relative;margin-top:-84px;background:linear-gradient(180deg,#F7F9FF,#FFFFFF);border:1px solid var(--line);border-radius:18px;box-shadow:0 10px 30px rgba(11,22,51,.12);padding:20px 22px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+@media (max-width:720px){.summary{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.summary .k{font-size:12px;color:var(--muted);font-weight:600}
+.summary .v{font-size:16px;font-weight:700;margin-top:2px}
+.summary .s{font-size:12.5px;color:var(--faint);margin-top:2px;line-height:1.45}
+/* sections */
+section{margin-top:40px}
+h2{font-size:22px;font-weight:800;margin:0;letter-spacing:-.01em}
+.lead{color:var(--muted);font-size:13.5px;margin:4px 0 0}
+.shead{display:flex;justify-content:space-between;align-items:flex-end;gap:12px}
+.shead .src{font-size:11px;font-weight:700;color:var(--muted);letter-spacing:.04em}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;margin-top:14px;overflow:hidden}
+/* tabs */
+.tabs{display:flex;gap:8px;flex-wrap:wrap;padding:14px}
+.tabs button{font:inherit;font-size:14px;font-weight:700;border:1px solid var(--line);background:#fff;color:var(--ink);border-radius:12px;padding:9px 14px;cursor:pointer;display:flex;gap:6px;align-items:baseline}
+.tabs button small{font-weight:500;font-size:12px;color:var(--muted)}
+.tabs button[aria-selected="true"]{background:var(--navy);color:#fff;border-color:var(--navy)}
+.tabs button[aria-selected="true"] small{color:#C9D4F3}
+.course{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:6px 18px 14px;border-top:1px solid var(--line)}
+.course b{display:block;font-size:17px;padding-top:10px}
+.course span{font-size:13px;color:var(--muted)}
+.course button{font:inherit;font-size:13px;font-weight:600;border:1px solid var(--line);background:#fff;border-radius:10px;padding:7px 12px;cursor:pointer;flex:none}
+#mapbox{position:relative;height:440px;background:#E8ECF2}
+#map{position:absolute;inset:0}
+#maperr{position:absolute;inset:0;display:grid;place-items:center;padding:24px;text-align:center;color:var(--muted);font-size:14px}
+#maperr[hidden]{display:none}
+.legend{display:flex;flex-wrap:wrap;gap:6px 16px;padding:12px 18px 0;font-size:12.5px;color:var(--muted)}
+.legend i{display:inline-block;width:18px;height:4px;border-radius:2px;background:var(--c);vertical-align:middle;margin-right:6px}
+.legend .pd{display:inline-block;width:11px;height:11px;border-radius:50%;border:2px dashed var(--muted);vertical-align:-1px;margin-right:6px}
+.mnote{font-size:12.5px;color:var(--faint);padding:4px 18px 14px}
+.stops{display:flex;gap:8px;overflow-x:auto;padding:14px 18px;border-top:1px solid var(--line);scrollbar-width:thin}
+.stops button{flex:none;font:inherit;font-size:13px;font-weight:600;border:1px solid var(--line);background:#fff;border-radius:99px;padding:5px 12px 5px 5px;display:flex;gap:7px;align-items:center;cursor:pointer;white-space:nowrap}
+.stops button[aria-pressed="true"]{border-color:var(--c);box-shadow:0 0 0 2px var(--c) inset}
+.n{width:22px;height:22px;border-radius:50%;background:var(--c);color:#fff;display:inline-grid;place-items:center;font-size:12px;font-weight:700;flex:none}
+.detail{padding:6px 18px 18px}
+.detail h3{font-size:16px;margin:4px 0 4px}
+.detail p{margin:0;color:var(--muted);font-size:14px}
+.detail a{display:inline-block;margin-top:8px;font-size:13px;font-weight:600;color:var(--am)}
+/* timetable */
+.tt{padding:6px 0}
+.ti{display:grid;grid-template-columns:110px minmax(0,1fr);gap:4px 14px;padding:14px 20px;border-top:1px solid var(--line)}
+.ti:first-child{border-top:0}
+.ti .tm{font-weight:700;font-size:14px;color:var(--c);font-variant-numeric:tabular-nums}
+.ti .tm.none{color:var(--faint);font-weight:500}
+.ti h4{margin:0;font-size:15.5px;display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.ti p{margin:3px 0 0;font-size:13.5px;color:var(--muted)}
+.ti .route{font-size:12.5px;color:var(--faint);margin-top:3px}
+.tag{font-size:11.5px;font-weight:700;padding:2px 8px;border-radius:99px;background:var(--tb);color:var(--tc)}
+.tag.iv{--tb:#EDE8FF;--tc:#5B3FD6}
+.tag.warn{--tb:#FFE9E2;--tc:#C2410C}
+.tag.meal{--tb:#FFF1D6;--tc:#9A6400}
+.tag.bus{--tb:#EEF0FF;--tc:#4B4FC8}
+.ti.minor{background:#FAFBFD}
+.ti.minor h4{font-size:14px;font-weight:600}
+.warnbox{margin-top:14px;background:var(--warnbg);border:1px solid var(--warnline);border-radius:14px;padding:14px 18px;font-size:13.5px;color:#7A5A00}
+/* directions */
+.dir{display:flex;flex-wrap:wrap;gap:8px;padding:16px 18px}
+.dir a{font-size:13.5px;font-weight:600;text-decoration:none;border:1px solid var(--line);border-radius:12px;padding:9px 13px;background:#fff;display:flex;gap:6px;align-items:center}
+.dir a::after{content:"↗";color:var(--faint);font-weight:500}
+.dir a i{width:8px;height:8px;border-radius:50%;background:var(--c);display:inline-block}
+.moves{border-top:1px solid var(--line)}
+.mv{display:grid;grid-template-columns:110px minmax(0,1fr);gap:14px;padding:12px 18px;border-top:1px solid var(--line);font-size:14px}
+.mv:first-child{border-top:0}
+.mv b{color:var(--bus);font-variant-numeric:tabular-nums}
+.mv span small{display:block;color:var(--faint);font-size:12.5px}
+/* safety */
+.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:14px}
+@media (max-width:640px){.grid2{grid-template-columns:1fr}}
+.tile{background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px 16px}
+.tile b{display:block;font-size:14px;margin-bottom:2px}
+.tile span{font-size:13.5px;color:var(--muted)}
+/* checklist */
+.check{list-style:none;margin:0;padding:6px 0}
+.check li{border-top:1px solid var(--line)}
+.check li:first-child{border-top:0}
+.check button{all:unset;box-sizing:border-box;width:100%;display:flex;gap:12px;align-items:center;padding:13px 18px;cursor:pointer;font-size:14.5px}
+.check button:focus-visible{outline:2px solid var(--am);outline-offset:-2px}
+.check .box{width:20px;height:20px;border-radius:6px;border:2px solid #C5CBD8;flex:none;display:grid;place-items:center}
+.check li.done .box{background:var(--pm);border-color:var(--pm)}
+.check li.done .box::after{content:"";width:9px;height:5px;border:2px solid #fff;border-top:0;border-right:0;transform:rotate(-45deg) translate(1px,-1px)}
+.check li.done .txt{text-decoration:line-through;color:var(--faint)}
+footer{margin:48px 0 0;padding:24px 0 calc(32px + env(safe-area-inset-bottom));border-top:1px solid var(--line);font-size:12.5px;color:var(--faint)}
+/* map overlays */
+.mk{display:grid;justify-items:center;cursor:pointer}
+.mk .dot{width:30px;height:30px;border-radius:50%;background:var(--c);color:#fff;font:700 13px var(--f);display:grid;place-items:center;border:2.5px solid #fff;box-shadow:0 2px 6px rgba(0,0,0,.35);transition:transform .15s}
+.mk.on .dot{transform:scale(1.25)}
+.mk .lb{margin-top:3px;font:600 12px var(--f);background:rgba(255,255,255,.95);padding:1px 7px;border-radius:4px;box-shadow:0 0 0 1px rgba(0,0,0,.08);white-space:nowrap}
+.pk{display:grid;justify-items:center}
+.pk .d{width:12px;height:12px;border-radius:50%;background:#fff;border:2.5px dashed var(--c)}
+.pk .lb{margin-top:2px;font:500 11px var(--f);color:var(--muted);background:rgba(255,255,255,.9);padding:0 5px;border-radius:3px;white-space:nowrap}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
 </style>
 </head>
 <body>
-<div id="app">
-  <div id="mapwrap"><div id="map"></div><div id="err" hidden><div id="errbox"></div></div></div>
-  <aside id="panel">
-    <div class="eyebrow">2026 추계 정기학술답사 · 2일차</div>
-    <h1>서울 도보답사 시간표(안)</h1>
-    <div class="sub">11월 3일(화) · 09:30 국립현대미술관 하차 → 18:00 명동 승차</div>
-    <div class="tl" id="tl" title="09:30–18:00"></div>
-    <div class="tlk"><span style="--c:var(--stay)"><b></b>체류</span><span style="--c:var(--walk)"><b></b>도보</span><span style="--c:var(--lunch)"><b></b>점심</span><span style="--c:var(--bus)"><b></b>버스</span></div>
-    <div class="btns" id="views">
-      <button data-v="all">전체 동선</button>
-      <button data-v="A">북촌</button>
-      <button data-v="B">낙원·익선</button>
-      <button data-v="C">서순라길~청계천</button>
-      <button data-v="F">을지로·명동</button>
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow">공주대학교 지리학과 · 2026 추계 정기학술답사 2일차</div>
+    <h1>한옥 골목에서 재개발 현장까지,<br>서울 도심을 걸어서 읽는 하루</h1>
+    <p>삼청동길에서 출발해 북촌, 낙원·익선동, 서순라길과 종묘, 세운상가와 청계천을 지나 을지로 골목과 명동에서 끝납니다. 북촌·서순라길·청계천에서 조별 인터뷰를 진행합니다.</p>
+    <div class="chips">
+      <span>2026.11.3 화</span><span>07:40 의정부 숙소 출발</span><span>09:30 삼청동길</span><span>도보 약 6.5km</span><span>조별 인터뷰 3회</span><span>18:00 남산예장공원 승차</span>
     </div>
-    <div class="btns" id="layers">
-      <button data-t="USE_DISTRICT" aria-pressed="false">지적편집도</button>
-      <button data-t="TERRAIN" aria-pressed="false">지형도</button>
-      <button data-t="ROADVIEW" aria-pressed="false">로드뷰 도로</button>
+  </div>
+  <svg class="wave" viewBox="0 0 1200 120" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M0 70 C200 30 400 110 600 70 S1000 30 1200 70" fill="none" stroke="#fff" stroke-width="1.5" opacity=".7"/>
+    <path d="M0 85 C220 50 420 120 620 82 S1000 45 1200 88" fill="none" stroke="#fff" stroke-width="1" opacity=".45"/>
+    <path d="M0 120 L0 100 C250 80 450 125 650 98 S1000 80 1200 104 L1200 120Z" fill="#F2F4F8"/>
+  </svg>
+</header>
+
+<main class="wrap">
+  <div class="summary">
+    <div><div class="k">출발 · 아침</div><div class="v">07:40 의정부 숙소</div><div class="s">08:00 아침식사(국밥)<br>우리나라 국밥 본점</div></div>
+    <div><div class="k">답사 시작</div><div class="v">09:30 삼청동길</div><div class="s">국립현대미술관 서울관 앞</div></div>
+    <div><div class="k">점심</div><div class="v">11:30–12:30</div><div class="s">자율 점심시간<br>이후 안국역에서 출발</div></div>
+    <div><div class="k">승차 · 저녁 · 숙소</div><div class="v">18:00 남산예장공원</div><div class="s">19:30 김가네김치두루치기(고양)<br>20:30 파주골든힐호텔</div></div>
+  </div>
+
+  <section id="route">
+    <div class="shead"><div><h2>걷는 경로</h2><p class="lead">시간대를 고르면 그 구간의 실제 보행 경로를 크게 볼 수 있습니다.</p></div><span class="src">KAKAO MAP</span></div>
+    <div class="card">
+      <div class="tabs" role="tablist" id="tabs">
+        <button role="tab" aria-selected="true" data-p="all">전체</button>
+        <button role="tab" aria-selected="false" data-p="am">오전 <small>삼청동·북촌</small></button>
+        <button role="tab" aria-selected="false" data-p="pm">오후 <small>낙원·서순라·세운·청계천</small></button>
+        <button role="tab" aria-selected="false" data-p="ev">저녁 <small>을지로·명동</small></button>
+      </div>
+      <div class="course"><div><b id="courseT">하루 코스</b><span id="courseS"></span></div><button id="fitBtn" type="button">경로 전체 보기</button></div>
+      <div id="mapbox"><div id="map"></div><div id="maperr" hidden></div></div>
+      <div class="legend"><span><i style="--c:var(--am)"></i>오전</span><span><i style="--c:var(--pm)"></i>오후</span><span><i style="--c:var(--ev)"></i>저녁</span><span><span class="pd"></span>지나가는 곳</span><span>화살표: 진행 방향</span></div>
+      <div class="mnote">거리는 OpenStreetMap 보행로 기준 실제 경로입니다. 예상 시간은 걷는 시간이며 관찰·인터뷰·점심은 별도입니다.</div>
+      <div class="stops" id="stops"></div>
+      <div class="detail" id="detail"></div>
     </div>
-    <div class="rows" id="rows"></div>
-    <div class="note">도보 선은 OpenStreetMap 보행로 기준 실제 경로입니다. 번호 원은 체류·점심·버스, 작은 점선 원은 걸으며 지나는 곳입니다.</div>
-  </aside>
-</div>
+  </section>
+
+  <section id="schedule">
+    <h2>시간표</h2>
+    <p class="lead">11월 3일(화) 최종 일정 · 시간이 적히지 않은 지점은 순서대로 이어서 진행합니다.</p>
+    <div class="card"><div class="tt" id="tt"></div></div>
+    <div class="warnbox"><b>종묘는 매주 화요일 휴관</b>이라 외대문 앞에서 외부 관찰합니다. 세운상가는 옥상 출입이 금지되어 보행데크에서 세운4구역을 조망합니다. 북촌 레드존(북촌로11길 일대)은 관광 방문이 10:00–17:00로 제한되어 있어 10시 이후 들어갑니다.</div>
+  </section>
+
+  <section id="directions">
+    <h2>길찾기</h2>
+    <p class="lead">카카오맵 도보 길찾기가 바로 열립니다. 조별로 흩어져도 이 링크로 따라오면 됩니다.</p>
+    <div class="card">
+      <div class="dir" id="dir"></div>
+      <div class="moves">
+        <div class="mv"><b>07:40</b><span>의정부 숙소 출발 → 08:00 아침식사(국밥)<small>우리나라 국밥 본점</small></span></div>
+        <div class="mv"><b>09:30</b><span>버스 하차 · 삼청동길<small>국립현대미술관 서울관 앞</small></span></div>
+        <div class="mv"><b>18:00</b><span>남산예장공원에서 버스 승차<small>명동거리 → 명동역 → 남산예장공원</small></span></div>
+        <div class="mv"><b>19:30</b><span>저녁식사(김치두루치기) · 고양<small>김가네김치두루치기</small></span></div>
+        <div class="mv"><b>20:30</b><span>숙소 · 파주<small>파주골든힐호텔</small></span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="safety">
+    <h2>현장 유의사항</h2>
+    <div class="grid2">
+      <div class="tile"><b>북촌 레드존</b><span>주민이 사는 골목입니다. 큰 소리 설명과 인터뷰는 북촌로·계동길 쪽에서, 골목 안에서는 조용히 이동합니다.</span></div>
+      <div class="tile"><b>조별 인터뷰</b><span>북촌, 서순라길, 청계천 세 곳. 상대에게 먼저 답사 목적을 밝히고, 녹음·촬영은 동의를 받은 뒤 진행합니다.</span></div>
+      <div class="tile"><b>종묘 · 세운상가</b><span>종묘는 화요일 휴관이라 외부만 봅니다. 세운상가 옥상은 출입 금지, 보행데크에서 조망합니다.</span></div>
+      <div class="tile"><b>이동</b><span>조 단위로 움직입니다. 점심 후 안국역 출발, 18:00 남산예장공원 승차 전 인원을 확인합니다.</span></div>
+    </div>
+  </section>
+
+  <section id="checklist">
+    <h2>출발 전 확인</h2>
+    <p class="lead">누르면 지워집니다. 이 기기에만 저장됩니다.</p>
+    <div class="card"><ul class="check" id="check"></ul></div>
+  </section>
+
+  <footer>
+    공주대학교 지리학과 답사부 · 2026 추계 정기학술답사 2일차(11월 3일 화) 서울 도보답사.<br>
+    지도 © Kakao · 도보 경로 데이터 © OpenStreetMap 기여자. 현장 상황에 따라 일정이 바뀔 수 있습니다.
+  </footer>
+</main>
 <script>
-const P={"L0":[[37.57931,126.98059],[37.57927,126.98078],[37.5792,126.98112],[37.57919,126.98116],[37.57919,126.98131],[37.57917,126.98153],[37.57917,126.98159],[37.57976,126.9817],[37.5797,126.98189],[37.57966,126.98198],[37.57959,126.98225],[37.57963,126.98239],[37.57964,126.9829],[37.57984,126.98286],[37.57985,126.98294]],"L1":[[37.57985,126.98294],[37.57984,126.98286],[37.57964,126.9829],[37.57963,126.98239],[37.57959,126.98225],[37.57993,126.98237],[37.58032,126.98254],[37.58035,126.98243],[37.58055,126.98247],[37.58058,126.9822],[37.58082,126.98216],[37.58093,126.98221],[37.58107,126.98217],[37.58115,126.98221],[37.58143,126.98224],[37.58167,126.98217],[37.58175,126.98216],[37.58187,126.98216],[37.58208,126.98216],[37.58207,126.98249],[37.58205,126.98283],[37.58207,126.98311],[37.58211,126.98326],[37.58221,126.98362],[37.58233,126.98355],[37.58235,126.98359],[37.58245,126.98373],[37.58251,126.9837],[37.58254,126.98369]],"L2":[[37.58254,126.98369],[37.58251,126.9837],[37.58245,126.98373],[37.58235,126.98359],[37.58233,126.98355],[37.58221,126.98362],[37.58204,126.9838],[37.58186,126.98433],[37.58181,126.98444],[37.58173,126.98452],[37.58152,126.98463],[37.58148,126.98468],[37.58147,126.98475],[37.58146,126.98507],[37.58126,126.98507],[37.58126,126.98553],[37.581,126.98554],[37.58102,126.98622],[37.58097,126.98636],[37.58091,126.98648],[37.58089,126.98679],[37.58059,126.98677]],"L3":[[37.58059,126.98677],[37.58045,126.98676],[37.58037,126.98675],[37.58024,126.98674],[37.57989,126.98672],[37.57962,126.98673],[37.57934,126.98672],[37.57907,126.98672],[37.57827,126.98674],[37.57791,126.98676],[37.57765,126.98677],[37.57743,126.98681],[37.57732,126.98683],[37.57715,126.98689],[37.57691,126.98635],[37.57689,126.98631]],"L4":[[37.57689,126.98631],[37.57684,126.9862],[37.57668,126.98621],[37.57647,126.98625],[37.57601,126.98642],[37.57587,126.98647],[37.57574,126.98652],[37.57557,126.98658],[37.57511,126.98676],[37.5746,126.987],[37.57429,126.98716],[37.57352,126.98762],[37.57345,126.98767],[37.57316,126.98781],[37.57308,126.98784],[37.57298,126.98786],[37.57288,126.98786],[37.57272,126.98784],[37.57267,126.98783]],"L5":[[37.57267,126.98783],[37.57258,126.98781],[37.57257,126.98789],[37.57255,126.98843],[37.57255,126.98852],[37.57254,126.98871],[37.57256,126.98951],[37.57279,126.9895],[37.57285,126.98954],[37.57285,126.98958],[37.57288,126.98978],[37.57291,126.98992],[37.57296,126.99016],[37.57298,126.99017],[37.57313,126.99017],[37.5734,126.99017]],"L6":[[37.5734,126.99017],[37.57313,126.99017],[37.57321,126.99059],[37.57331,126.99076],[37.57336,126.99083],[37.57344,126.991],[37.57364,126.99094],[37.57367,126.99093],[37.5738,126.99088],[37.57386,126.99116],[37.57416,126.99107],[37.57419,126.99134],[37.57422,126.99157],[37.57429,126.99221]],"S6":[[37.57429,126.99221],[37.57403,126.99243],[37.57377,126.99257],[37.57347,126.99274],[37.57292,126.99313]],"L7":[[37.57292,126.99313],[37.57262,126.99334],[37.5726,126.99236],[37.57224,126.99241],[37.5722,126.99226],[37.57224,126.99241],[37.5722,126.99244],[37.57189,126.99281],[37.57201,126.99296],[37.57186,126.99311],[37.57194,126.99319],[37.5723,126.9935],[37.57222,126.99357],[37.57208,126.99378],[37.57209,126.99384],[37.57204,126.99407],[37.57203,126.9946]],"L8":[[37.57203,126.9946],[37.57202,126.99462],[37.57207,126.99474],[37.57185,126.99484],[37.57184,126.99484],[37.5715,126.99501],[37.57148,126.99502],[37.57127,126.99511],[37.57103,126.99517],[37.57102,126.99517],[37.57096,126.99518],[37.57095,126.99506],[37.57094,126.99506],[37.57087,126.99507],[37.57086,126.99507],[37.57076,126.99509],[37.57067,126.99508],[37.57063,126.99508],[37.57058,126.99508],[37.57054,126.99508],[37.5705,126.99508],[37.57046,126.99509],[37.56984,126.99521],[37.56971,126.99523]],"L9":[[37.56971,126.99523],[37.56967,126.99523],[37.56966,126.99506],[37.56959,126.99507],[37.56941,126.99508],[37.56883,126.99511],[37.56863,126.99513]],"L10":[[37.56863,126.99513],[37.56862,126.99511],[37.5686,126.99507],[37.56856,126.99508],[37.56855,126.99496],[37.56852,126.99455],[37.56843,126.99339],[37.56843,126.99331],[37.56841,126.99307],[37.56837,126.99308],[37.56833,126.99308],[37.5683,126.99278],[37.5682,126.99264],[37.56818,126.99244],[37.56777,126.99248],[37.56745,126.99252],[37.56692,126.99257],[37.56689,126.99194],[37.5671,126.99192],[37.56689,126.99194],[37.56682,126.99085],[37.56679,126.99044],[37.56679,126.99034],[37.56676,126.98966],[37.56672,126.98869],[37.56672,126.9884],[37.56666,126.98766],[37.56641,126.98767],[37.56622,126.9877],[37.56622,126.98751],[37.56621,126.98734],[37.56607,126.98735],[37.56607,126.98724],[37.56604,126.98589],[37.56603,126.98547],[37.56602,126.9841],[37.56567,126.98413],[37.56566,126.98413],[37.56543,126.98419],[37.5652,126.98424],[37.56498,126.98447],[37.56468,126.9848],[37.56385,126.98511],[37.56397,126.98576],[37.56406,126.98601],[37.56409,126.98608],[37.56419,126.98634],[37.56426,126.98649],[37.5643,126.98656],[37.56408,126.98671],[37.56404,126.98674],[37.56397,126.98679],[37.56396,126.9868],[37.5639,126.98683],[37.56377,126.98692],[37.56353,126.98714],[37.56361,126.98733],[37.56353,126.98739],[37.56352,126.98736],[37.5634,126.98745]],"L11":[[37.5634,126.98745],[37.56352,126.98736],[37.56353,126.98739],[37.56361,126.98733],[37.56353,126.98714],[37.56377,126.98692],[37.5639,126.98683],[37.56396,126.9868],[37.56397,126.98679],[37.56404,126.98674],[37.56408,126.98671],[37.5643,126.98656],[37.56426,126.98649],[37.56419,126.98634],[37.56409,126.98608],[37.56406,126.98601],[37.56397,126.98576],[37.56385,126.98511],[37.56379,126.98461]],"L12":[[37.56379,126.98461],[37.56385,126.98511],[37.56339,126.98525],[37.56325,126.98529],[37.56291,126.98539],[37.56281,126.98542],[37.5621,126.98564],[37.56165,126.98587],[37.56094,126.986],[37.56098,126.9863],[37.56091,126.98633],[37.56087,126.98634],[37.56092,126.98669],[37.56094,126.98682],[37.56094,126.98686],[37.561,126.98754],[37.561,126.98764],[37.561,126.9877],[37.56099,126.98778],[37.56098,126.98784],[37.56098,126.98791],[37.56098,126.98797],[37.56097,126.98802],[37.56096,126.98807],[37.56094,126.98816],[37.56089,126.98825],[37.56083,126.98833],[37.56078,126.98839],[37.56075,126.98842],[37.56072,126.98844],[37.56067,126.98847],[37.56048,126.9886],[37.56042,126.98865],[37.56034,126.98871],[37.56028,126.98878],[37.56024,126.98883],[37.55997,126.98892],[37.5599,126.98896]]};
+const P={"a1":[[37.57931,126.98059],[37.57927,126.98078],[37.5792,126.98112],[37.57919,126.98116],[37.57919,126.98131],[37.57917,126.98153],[37.57917,126.98159],[37.57976,126.9817],[37.5797,126.98189],[37.57966,126.98198],[37.57959,126.98225],[37.57963,126.98239],[37.57964,126.9829],[37.57984,126.98286],[37.57985,126.98294],[37.57984,126.98286],[37.57964,126.9829],[37.57963,126.98239],[37.57959,126.98225],[37.57993,126.98237],[37.58032,126.98254],[37.58035,126.98243],[37.58055,126.98247],[37.58058,126.9822],[37.58082,126.98216],[37.58093,126.98221],[37.58107,126.98217],[37.58115,126.98221],[37.58143,126.98224],[37.58167,126.98217],[37.58175,126.98216],[37.58187,126.98216],[37.58208,126.98216],[37.58207,126.98249],[37.58205,126.98283],[37.58207,126.98311],[37.58211,126.98326],[37.58221,126.98362],[37.58233,126.98355],[37.58235,126.98359],[37.58245,126.98373],[37.58251,126.9837],[37.58254,126.98369]],"i2":[[37.58254,126.98369],[37.58251,126.9837],[37.58245,126.98373],[37.58235,126.98359],[37.58233,126.98355],[37.58221,126.98362],[37.58204,126.9838],[37.58186,126.98433],[37.58181,126.98444],[37.58173,126.98452],[37.58152,126.98463],[37.58148,126.98468],[37.58147,126.98475],[37.58146,126.98507],[37.58126,126.98507],[37.58126,126.98553],[37.581,126.98554],[37.58102,126.98622],[37.58097,126.98636],[37.58091,126.98648],[37.58089,126.98679],[37.58059,126.98677]],"a_lunch":[[37.58059,126.98677],[37.58045,126.98676],[37.58037,126.98675],[37.58024,126.98674],[37.57989,126.98672],[37.57962,126.98673],[37.57934,126.98672],[37.57907,126.98672],[37.57827,126.98674],[37.57791,126.98676],[37.57765,126.98677],[37.57743,126.98681],[37.57732,126.98683],[37.57715,126.98689],[37.57691,126.98635],[37.57689,126.98631]],"a3":[[37.57689,126.98631],[37.57684,126.9862],[37.57668,126.98621],[37.57647,126.98625],[37.57601,126.98642],[37.57587,126.98647],[37.57574,126.98652],[37.57557,126.98658],[37.57511,126.98676],[37.5746,126.987],[37.57429,126.98716],[37.57352,126.98762],[37.57345,126.98767],[37.57316,126.98781],[37.57308,126.98784],[37.57298,126.98786],[37.57288,126.98786],[37.57272,126.98784],[37.57267,126.98783]],"a4":[[37.57267,126.98783],[37.57258,126.98781],[37.57257,126.98789],[37.57255,126.98843],[37.57255,126.98852],[37.57254,126.98871],[37.57256,126.98951],[37.57279,126.9895],[37.57285,126.98954],[37.57285,126.98958],[37.57288,126.98978],[37.57291,126.98992],[37.57296,126.99016],[37.57298,126.99017],[37.57313,126.99017],[37.5734,126.99017]],"a5":[[37.5734,126.99017],[37.57313,126.99017],[37.57321,126.99059],[37.57331,126.99076],[37.57336,126.99083],[37.57344,126.991],[37.57364,126.99094],[37.57367,126.99093],[37.5738,126.99088],[37.57386,126.99116],[37.57416,126.99107],[37.57419,126.99134],[37.57422,126.99157],[37.57429,126.99221]],"i5":[[37.57429,126.99221],[37.57403,126.99243],[37.57377,126.99257],[37.57347,126.99274],[37.57292,126.99313]],"a6":[[37.57292,126.99313],[37.57257,126.99344],[37.57236,126.99361],[37.57216,126.99379],[37.5721,126.99385],[37.57209,126.99384],[37.57204,126.99407],[37.57203,126.9946]],"a7":[[37.57203,126.9946],[37.57202,126.99462],[37.57207,126.99474],[37.57185,126.99484],[37.57184,126.99484],[37.5715,126.99501],[37.57148,126.99502],[37.57127,126.99511],[37.57103,126.99517],[37.57102,126.99517],[37.57096,126.99518],[37.57095,126.99506],[37.57094,126.99506],[37.57087,126.99507],[37.57086,126.99507],[37.57076,126.99509],[37.57067,126.99508],[37.57063,126.99508],[37.57058,126.99508],[37.57054,126.99508],[37.5705,126.99508],[37.57046,126.99509],[37.56984,126.99521],[37.56971,126.99523]],"a8":[[37.56971,126.99523],[37.56967,126.99523],[37.56966,126.99506],[37.56959,126.99507],[37.56941,126.99508],[37.56883,126.99511],[37.56863,126.99513]],"a9":[[37.56863,126.99513],[37.56862,126.99511],[37.5686,126.99507],[37.56856,126.99508],[37.56855,126.99496],[37.56852,126.99455],[37.56843,126.99339],[37.56843,126.99331],[37.56841,126.99307],[37.56837,126.99308],[37.56833,126.99308],[37.5683,126.99278],[37.5682,126.99264],[37.56818,126.99244],[37.56777,126.99248],[37.56745,126.99252],[37.56692,126.99257],[37.56689,126.99194],[37.5671,126.99192]],"a10":[[37.5671,126.99192],[37.56689,126.99194],[37.56682,126.99085],[37.56679,126.99044],[37.56679,126.99034],[37.56676,126.98966],[37.56672,126.98869],[37.56672,126.9884],[37.56666,126.98766],[37.56641,126.98767],[37.56622,126.9877],[37.56622,126.98751],[37.56621,126.98734],[37.56607,126.98735],[37.56607,126.98724],[37.56604,126.98589],[37.56603,126.98547],[37.56602,126.9841],[37.56567,126.98413],[37.56566,126.98413],[37.56543,126.98419],[37.5652,126.98424],[37.56498,126.98447],[37.56468,126.9848],[37.56385,126.98511],[37.56397,126.98576],[37.56406,126.98601],[37.56409,126.98608],[37.56419,126.98634],[37.56426,126.98649],[37.5643,126.98656],[37.56408,126.98671],[37.56404,126.98674],[37.56397,126.98679],[37.56396,126.9868],[37.5639,126.98683],[37.56377,126.98692],[37.56353,126.98714],[37.56361,126.98733],[37.56353,126.98739],[37.56352,126.98736],[37.5634,126.98745]],"a11":[[37.5634,126.98745],[37.56352,126.98736],[37.56353,126.98739],[37.56361,126.98733],[37.56353,126.98714],[37.56377,126.98692],[37.5639,126.98683],[37.56396,126.9868],[37.56397,126.98679],[37.56404,126.98674],[37.56408,126.98671],[37.5643,126.98656],[37.56426,126.98649],[37.56419,126.98634],[37.56409,126.98608],[37.56406,126.98601],[37.56397,126.98576],[37.56385,126.98511],[37.56379,126.98461]],"a12":[[37.56379,126.98461],[37.56385,126.98511],[37.56339,126.98525],[37.56325,126.98529],[37.56291,126.98539],[37.56281,126.98542],[37.5621,126.98564],[37.56165,126.98587],[37.56094,126.986],[37.56098,126.9863],[37.56091,126.98633],[37.56087,126.98634],[37.56092,126.98669],[37.56094,126.98682],[37.56094,126.98686],[37.561,126.98754],[37.561,126.98764],[37.561,126.9877],[37.56099,126.98778],[37.56098,126.98784],[37.56098,126.98791],[37.56098,126.98797],[37.56097,126.98802],[37.56096,126.98807],[37.56094,126.98816],[37.56089,126.98825],[37.56083,126.98833],[37.56078,126.98839],[37.56075,126.98842],[37.56072,126.98844],[37.56067,126.98847],[37.56048,126.9886],[37.56042,126.98865],[37.56034,126.98871],[37.56028,126.98878],[37.56024,126.98883],[37.55997,126.98892],[37.5599,126.98896]]};
 
-const KAKAO_JS_KEY = "b53aa9a5eaca12abca83f43a6ced2a3f";
-const KC={체류:"var(--stay)",도보:"var(--walk)",점심:"var(--lunch)",버스:"var(--bus)"};
-const KH={체류:"#1D2830",도보:"#2F70B0",점심:"#B47A1E",버스:"#A84E86"};
-// 시간표 문서의 행을 그대로 옮김: [시작, 끝, 구분, 장소·이동 구간, 소요, 내용]
-// n = 지도 번호, at = 위치, path = 도보 경로, inside = 체류 중 걷는 구간
-const ROWS=[
- {s:"09:30",e:"09:45",k:"체류",p:"국립현대미술관 서울관 앞 하차",m:"15분",c:"하차 후 인원 확인, 삼청동길 상권 관찰",n:1,at:[37.57883,126.98043],short:"국립현대미술관"},
- {s:"09:45",e:"10:00",k:"도보",p:"→ 국립현대미술관 → 북촌로5길 → 북촌로11길",m:"15분",c:"10:00 레드존 개방에 맞춰 도착",path:["L0","L1"]},
- {s:"10:00",e:"11:20",k:"체류",p:"북촌 한옥마을 (레드존 · 계동길)",m:"80분",c:"레드존 관찰 + 조별 인터뷰",n:2,at:[37.58254,126.98369],short:"북촌 한옥마을",inside:["L2"]},
- {s:"11:20",e:"11:30",k:"도보",p:"→ 계동길 → 안국역",m:"10분",c:"",path:["L3"]},
- {s:"11:30",e:"11:35",k:"체류",p:"안국역 4번 출구 집합",m:"5분",c:"인원 확인",n:3,at:[37.57689,126.98631],short:"안국역 4번 출구"},
- {s:"11:35",e:"11:50",k:"도보",p:"→ 안국역 → 삼일대로 → 낙원악기상가",m:"15분",c:"",path:["L4"]},
- {s:"11:50",e:"12:30",k:"점심",p:"낙원동 일대",m:"40분",c:"단체 식당 사전 예약 혹은 조별 자유식",n:4,at:[37.57335,126.98705],short:"점심 (낙원동)"},
- {s:"12:30",e:"12:50",k:"체류",p:"낙원악기상가",m:"20분",c:"도로 위 주상복합, 상가 하부 통로",n:5,at:[37.57267,126.98783],short:"낙원악기상가"},
- {s:"12:50",e:"12:55",k:"도보",p:"→ 낙원악기상가 → 익선동",m:"5분",c:"",path:["L5"]},
- {s:"12:55",e:"13:30",k:"체류",p:"익선동 한옥거리",m:"35분",c:"한옥 상업화, 업종·외관 관찰",n:6,at:[37.5734,126.99017],short:"익선동"},
- {s:"13:30",e:"13:45",k:"도보",p:"→ 익선동 → 돈화문로 → 서순라길",m:"15분",c:"",path:["L6"]},
- {s:"13:45",e:"14:55",k:"체류",p:"서순라길",m:"70분",c:"종묘 담장길 답사 + 조별 인터뷰",n:7,at:[37.57429,126.99221],short:"서순라길",inside:["S6"]},
- {s:"14:55",e:"15:05",k:"도보",p:"→ 서순라길 → 귀금속거리(통과) → 종묘 외대문",m:"10분",c:"귀금속거리는 걸으며 관찰",path:["L7"]},
- {s:"15:05",e:"15:25",k:"체류",p:"종묘 외대문 앞 집결",m:"20분",c:"<mark>화요일 휴관</mark>으로 외부 관찰, 세운4구역 조망",n:8,at:[37.57203,126.9946],short:"종묘 외대문"},
- {s:"15:25",e:"15:30",k:"도보",p:"→ 종묘시민광장 → 세운상가",m:"5분",c:"",path:["L8"]},
- {s:"15:30",e:"16:00",k:"체류",p:"세운상가",m:"30분",c:"도심 제조업 / 옥상 출입 금지 → 보행데크에서 세운4구역 조망",n:9,at:[37.56971,126.99523],short:"세운상가"},
- {s:"16:00",e:"16:05",k:"도보",p:"→ 세운상가 → 청계천",m:"5분",c:"",path:["L9"]},
- {s:"16:05",e:"16:35",k:"체류",p:"청계천",m:"30분",c:"",n:10,at:[37.56863,126.99513],short:"청계천"},
- {s:"16:35",e:"17:05",k:"도보",p:"→ 청계천 → 을지로 노가리골목 → 을지로입구 골뱅이골목 → 명동성당",m:"30분",c:"을지로 골목은 걸으며 관찰",path:["L10"]},
- {s:"17:05",e:"17:15",k:"체류",p:"명동성당",m:"10분",c:"",n:11,at:[37.5634,126.98745],short:"명동성당"},
- {s:"17:15",e:"17:20",k:"도보",p:"→ 명동성당 → 명동거리",m:"5분",c:"",path:["L11"]},
- {s:"17:20",e:"17:45",k:"체류",p:"명동거리 (라인프렌즈 스퀘어 일대)",m:"25분",c:"상권 관찰, 간판 언어·굿즈 매장",n:12,at:[37.56379,126.98461],short:"명동거리"},
- {s:"17:45",e:"17:55",k:"도보",p:"→ 명동거리 → 명동역 → 남산예장공원 버스주차장",m:"10분",c:"",path:["L12"]},
- {s:"17:55",e:"18:00",k:"체류",p:"버스주차장 집결",m:"5분",c:"인원 확인",n:13,at:[37.5599,126.98896],short:"버스주차장 집결"},
- {s:"18:00",e:"",k:"버스",p:"버스 승차",m:"—",c:"남산예장공원 버스주차장 (이용 가능 여부 기사님 확인)",n:14,at:[37.55972,126.98930],short:"버스 승차"}
+const KAKAO_JS_KEY="b53aa9a5eaca12abca83f43a6ced2a3f";
+const PC={am:"#2563EB",pm:"#0F8A5F",ev:"#E0592A"};
+const PN={all:"하루 코스",am:"오전 · 삼청동·북촌",pm:"오후 · 낙원·서순라·세운·청계천",ev:"저녁 · 을지로·명동"};
+// 지점 (최종 일정표 2일차 순서)
+const S=[
+ {n:1,p:"am",name:"삼청동길",sub:"국립현대미술관 서울관 앞",time:"09:30",lat:37.57883,lng:126.98043,
+  desc:"버스 하차 후 인원 확인. 삼청동길 상권 관찰."},
+ {n:2,p:"am",name:"북촌 한옥마을",sub:"가회동, 계동길",time:"10:00",lat:37.58254,lng:126.98369,path:"a1",inside:"i2",
+  route:"북촌로5길 → 북촌로11길",tags:[["조별 인터뷰","iv"]],
+  desc:"레드존(가회동 북촌로11길 일대) 관찰 후 계동길로."},
+ {n:3,p:"pm",name:"낙원악기상가",sub:"",time:"",lat:37.57267,lng:126.98783,path:"a3",
+  route:"안국역 → 삼일대로 → 낙원악기상가",desc:"도로 위 주상복합, 상가 하부 통로."},
+ {n:4,p:"pm",name:"익선동 한옥거리",sub:"",time:"",lat:37.5734,lng:126.99017,path:"a4",
+  route:"낙원악기상가 → 익선동",desc:"한옥 상업화, 업종·외관 관찰."},
+ {n:5,p:"pm",name:"서순라길",sub:"종묘 담장길",time:"13:45",lat:37.57429,lng:126.99221,path:"a5",inside:"i5",
+  route:"익선동 → 돈화문로 → 서순라길",tags:[["조별 인터뷰","iv"]],desc:"종묘 담장길 답사."},
+ {n:6,p:"pm",name:"종묘",sub:"외대문 앞",time:"",lat:37.57203,lng:126.9946,path:"a6",
+  route:"서순라길 → 종묘 외대문",tags:[["화요일 휴관","warn"]],desc:"화요일 휴관으로 외부 관찰, 세운4구역 조망."},
+ {n:7,p:"pm",name:"세운상가",sub:"보행데크",time:"",lat:37.56971,lng:126.99523,path:"a7",
+  route:"종묘시민광장 → 세운상가",tags:[["옥상 출입 금지","warn"]],desc:"도심 제조업. 옥상 출입 금지라 보행데크에서 세운4구역 조망."},
+ {n:8,p:"pm",name:"청계천",sub:"",time:"",lat:37.56863,lng:126.99513,path:"a8",
+  route:"세운상가 → 청계천",tags:[["조별 인터뷰 예정","iv"]],desc:""},
+ {n:9,p:"ev",name:"을지로 골목",sub:"노가리골목 · 골뱅이골목",time:"",lat:37.5671,lng:126.99192,path:"a9",
+  route:"청계천 → 을지로 노가리골목 → 을지로입구 골뱅이골목",desc:"을지로 골목은 걸으며 관찰."},
+ {n:10,p:"ev",name:"명동성당",sub:"",time:"",lat:37.5634,lng:126.98745,path:"a10",route:"골뱅이골목 → 명동성당",desc:""},
+ {n:11,p:"ev",name:"명동거리",sub:"라인프렌즈 스퀘어 일대",time:"",lat:37.56379,lng:126.98461,path:"a11",
+  route:"명동성당 → 명동거리",desc:"상권 관찰, 간판 언어·굿즈 매장."},
+ {n:12,p:"ev",name:"남산예장공원",sub:"버스 승차",time:"18:00",lat:37.5599,lng:126.98896,path:"a12",
+  route:"명동거리 → 명동역 → 남산예장공원",tags:[["버스 승차","bus"]],desc:"남산예장공원에서 버스 승차."}
 ];
-// 도보 구간에 적힌 경유지 (걸으며 지나는 곳)
-const PASS=[["북촌로5길",37.57985,126.98294],["계동길",37.58059,126.98677],["귀금속거리",37.5722,126.99226],["종묘시민광장",37.57148,126.99502],["노가리골목",37.5671,126.99192],["골뱅이골목",37.56567,126.98413],["명동역",37.56091,126.98633]];
-const VIEWS={A:[[37.5765,126.9790],[37.5835,126.9885]],B:[[37.5715,126.9850],[37.5755,126.9950]],C:[[37.5680,126.9890],[37.5750,126.9975]],F:[[37.5590,126.9820],[37.5690,126.9950]]};
+const PASS=[["북촌로5길",37.57985,126.98294,"am"],["계동길",37.58059,126.98677,"am"],["안국역",37.57689,126.98631,"am"],["종묘시민광장",37.57148,126.99502,"pm"],["골뱅이골목",37.56567,126.98413,"ev"],["명동역",37.56091,126.98633,"ev"]];
+// 시간표 (최종 일정표 행 순서)
+const TT=[
+ {t:"07:40",k:"bus",h:"의정부 숙소에서 출발",r:"",minor:true},
+ {t:"08:00",k:"meal",h:"아침식사(국밥)",tag:["의정부","meal"],r:"우리나라 국밥 본점",minor:true},
+ {t:"09:30~",s:1},
+ {t:"10:00~",s:2},
+ {t:"",h:"북촌 한옥마을 조별 인터뷰 진행",tag:["조별 인터뷰","iv"],minor:true,c:"am"},
+ {t:"11:30–12:30",k:"meal",h:"자율 점심시간",tag:["자율","meal"],r:"점심 후 안국역에서 출발",minor:true},
+ {t:"",s:3},{t:"",s:4},
+ {t:"13:45~",s:5},
+ {t:"",h:"서순라길 조별 인터뷰 진행",tag:["조별 인터뷰","iv"],minor:true,c:"pm"},
+ {t:"",s:6},{t:"",s:7},{t:"",s:8},
+ {t:"",h:"청계천 조별 인터뷰 진행 예정",tag:["조별 인터뷰","iv"],minor:true,c:"pm"},
+ {t:"",s:9},{t:"",s:10},{t:"",s:11},
+ {t:"18:00",s:12},
+ {t:"19:30",k:"meal",h:"저녁식사(김치두루치기)",tag:["고양","meal"],r:"김가네김치두루치기",minor:true},
+ {t:"20:30",k:"bus",h:"숙소",tag:["파주","bus"],r:"파주골든힐호텔",minor:true}
+];
+const CHECK=["조별 인터뷰 질문지와 역할 분담(북촌·서순라길·청계천)","편한 운동화 (하루 도보 약 6.5km)","겉옷 — 11월 초, 저녁은 쌀쌀하다","보조배터리·사진 저장공간","학생증","우리 조 번호와 조장 이름 확인","18:00 남산예장공원 승차 시각 확인"];
+const KEY="dapsa-2026-day2-check";
 
-const toMin=t=>{const[h,m]=t.split(':').map(Number);return h*60+m};
 function len(l){let d=0;for(let i=1;i<l.length;i++){const a=l[i-1],b=l[i],x=(b[1]-a[1])*Math.PI/180*Math.cos((a[0]+b[0])/2*Math.PI/180),y=(b[0]-a[0])*Math.PI/180;d+=6371000*Math.hypot(x,y);}return d;}
-const pathOf=keys=>keys.flatMap((k,i)=>i?P[k].slice(1):P[k]);
+const legsOf=p=>{const ks=[];S.forEach(s=>{if(p==='all'||s.p===p){if(s.path)ks.push(s.path);if(s.inside)ks.push(s.inside);}});if(p==='all'||p==='am')ks.push('a_lunch');return ks;};
+const meters=p=>legsOf(p).reduce((a,k)=>a+len(P[k]),0);
+const fmt=m=>{const km=(m/1000).toFixed(1),min=Math.round(m/1000*15);return `도보 ${km} km · 걷는 시간 약 ${min>=60?Math.floor(min/60)+'시간 '+(min%60)+'분':min+'분'}`};
 
-/* ---------- 시간 막대 ---------- */
-const tl=document.getElementById('tl');
-ROWS.forEach((r,i)=>{if(!r.e)return;const w=toMin(r.e)-toMin(r.s);const b=document.createElement('i');b.style.flex=w+' 1 0';b.style.setProperty('--c',KC[r.k]);
-  b.title=`${r.s}–${r.e} ${r.k} · ${r.p.replace(/^→ /,'')}`;b.addEventListener('click',()=>select(i,true));tl.appendChild(b);});
+/* 시간표 */
+const tt=document.getElementById('tt');
+TT.forEach(r=>{const d=document.createElement('div');
+  if(r.s){const s=S[r.s-1];d.className='ti';d.style.setProperty('--c',PC[s.p]);
+    d.innerHTML=`<div class="tm${r.t?'':' none'}">${r.t||'이어서'}</div><div><h4><span class="n" style="--c:${PC[s.p]}">${s.n}</span>${s.name}${s.sub?` <span style="font-weight:500;color:var(--muted);font-size:13.5px">${s.sub}</span>`:''}${(s.tags||[]).map(t=>`<span class="tag ${t[1]}">${t[0]}</span>`).join('')}</h4>${s.desc?`<p>${s.desc}</p>`:''}${s.route?`<div class="route">이동 경로 · ${s.route}</div>`:''}</div>`;
+    d.style.cursor='pointer';d.addEventListener('click',()=>{pick(s.n);document.getElementById('route').scrollIntoView({behavior:'smooth'});});}
+  else{d.className='ti minor';d.style.setProperty('--c',r.k==='bus'?'var(--bus)':r.k==='meal'?'#9A6400':PC[r.c]);
+    d.innerHTML=`<div class="tm${r.t?'':' none'}">${r.t||'이어서'}</div><div><h4>${r.h}${r.tag?`<span class="tag ${r.tag[1]}">${r.tag[0]}</span>`:''}</h4>${r.r?`<div class="route">${r.r}</div>`:''}</div>`;}
+  tt.appendChild(d);});
 
-/* ---------- 시간표 ---------- */
-const rowsEl=document.getElementById('rows');const rowEls=[];
-ROWS.forEach((r,i)=>{
-  const d=document.createElement('div');d.className='row '+{체류:'stay',도보:'walk',점심:'lunch',버스:'bus'}[r.k];d.style.setProperty('--c',KC[r.k]);
-  const dist=r.path?`<span class="dist">실제 도보 약 ${Math.round(len(pathOf(r.path))/10)*10}m</span>`:'';
-  const links=r.at?`<div class="links"><a href="https://map.kakao.com/link/map/${encodeURIComponent(r.short)},${r.at[0]},${r.at[1]}" target="_blank" rel="noopener">카카오맵에서 보기</a><a href="https://map.kakao.com/link/to/${encodeURIComponent(r.short)},${r.at[0]},${r.at[1]}" target="_blank" rel="noopener">여기로 길찾기</a></div>`:'';
-  d.innerHTML=`<div class="t">${r.s}${r.e?'–'+r.e:''}<span class="d">${r.m}</span></div>
-   <div class="what"><div class="head">${r.n?`<span class="num">${r.n}</span>`:''}<span class="kind">${r.k}</span><span class="place">${r.p}</span></div>
-   ${r.c?`<div class="note">${r.c}</div>`:''}${dist}${links}</div>`;
-  d.addEventListener('click',e=>{if(e.target.tagName!=='A')select(i,false)});rowsEl.appendChild(d);rowEls.push(d);
-});
+/* 길찾기 링크 */
+const dir=document.getElementById('dir');
+const wl=(a,b)=>`https://map.kakao.com/link/by/walk/${encodeURIComponent(a.name)},${a.lat},${a.lng}/${encodeURIComponent(b.name)},${b.lat},${b.lng}`;
+const anguk={name:"안국역",lat:37.57689,lng:126.98631};
+[["오전 · 삼청동길 → 북촌",S[0],S[1],"am"],["북촌 → 안국역",S[1],anguk,"am"],["점심 후 · 안국역 → 낙원악기상가",anguk,S[2],"pm"],["낙원악기상가 → 익선동",S[2],S[3],"pm"],["익선동 → 서순라길",S[3],S[4],"pm"],["서순라길 → 종묘 외대문",S[4],S[5],"pm"],["종묘 → 세운상가",S[5],S[6],"pm"],["세운상가 → 청계천",S[6],S[7],"pm"],["청계천 → 을지로 골목",S[7],S[8],"ev"],["을지로 → 명동성당",S[8],S[9],"ev"],["명동성당 → 명동거리",S[9],S[10],"ev"],["명동거리 → 남산예장공원",S[10],S[11],"ev"]]
+ .forEach(([t,a,b,p])=>{const x=document.createElement('a');x.href=wl(a,b);x.target='_blank';x.rel='noopener';x.style.setProperty('--c',PC[p]);x.innerHTML=`<i></i>${t}`;dir.appendChild(x);});
 
-/* ---------- 오류 안내 ---------- */
-function showErr(type){
-  document.getElementById('err').hidden=false;
-  document.getElementById('errbox').innerHTML={
-   file:`<h2>파일을 더블클릭해서 열면 지도가 뜨지 않습니다</h2><p>GitHub Pages 주소(<code>https://suho-cloud.github.io/seoul-dapsa/</code>)로 여세요. 오른쪽 시간표는 그대로 볼 수 있습니다.</p>`,
-   load:`<h2>카카오 지도를 불러오지 못했습니다</h2><p>① 카카오맵 사용 설정 ON ② 지금 주소 <code>${location.origin}</code>가 JavaScript 키 아래 도메인에 등록돼 있는지 ③ JavaScript 키가 맞는지 확인하세요.</p>`
-  }[type];}
+/* 체크리스트 */
+let done={};try{done=JSON.parse(localStorage.getItem(KEY)||'{}')}catch(e){}
+const ck=document.getElementById('check');
+CHECK.forEach((c,i)=>{const li=document.createElement('li');if(done[i])li.classList.add('done');
+  li.innerHTML=`<button type="button" aria-pressed="${!!done[i]}"><span class="box"></span><span class="txt">${c}</span></button>`;
+  li.querySelector('button').addEventListener('click',e=>{done[i]=!done[i];li.classList.toggle('done',done[i]);e.currentTarget.setAttribute('aria-pressed',done[i]);try{localStorage.setItem(KEY,JSON.stringify(done))}catch(_){}});
+  ck.appendChild(li);});
 
-/* ---------- 지도 ---------- */
-let map,K,mks={},lines={},cur=null;
+/* 지점 칩 + 상세 */
+const stopsEl=document.getElementById('stops'),detail=document.getElementById('detail');const chips={};
+S.forEach(s=>{const b=document.createElement('button');b.type='button';b.style.setProperty('--c',PC[s.p]);b.setAttribute('aria-pressed','false');
+  b.innerHTML=`<span class="n">${s.n}</span>${s.name}`;b.addEventListener('click',()=>pick(s.n));stopsEl.appendChild(b);chips[s.n]=b;});
+let cur=null,map=null,K=null,mk={},lines=[],bounds={};
+function pick(n){const s=S[n-1];
+  if(cur){chips[cur].setAttribute('aria-pressed','false');mk[cur]&&mk[cur].classList.remove('on');}
+  cur=n;chips[n].setAttribute('aria-pressed','true');chips[n].scrollIntoView({block:'nearest',inline:'center',behavior:'smooth'});mk[n]&&mk[n].classList.add('on');
+  detail.innerHTML=`<h3>${s.n}. ${s.name}${s.sub?' · '+s.sub:''}${s.time?' · '+s.time:''}</h3><p>${s.desc||''}${s.route?`<br><span style="color:var(--faint);font-size:13px">이동 경로 · ${s.route}</span>`:''}</p><a href="https://map.kakao.com/link/map/${encodeURIComponent(s.name)},${s.lat},${s.lng}" target="_blank" rel="noopener">카카오지도에서 보기 ↗</a>`;
+  if(map){map.setLevel(Math.min(map.getLevel(),4));map.panTo(new K.LatLng(s.lat,s.lng));}}
+pick(1);
+
+/* 탭 */
+let period='all';
+function setPeriod(p){period=p;document.querySelectorAll('#tabs button').forEach(b=>b.setAttribute('aria-selected',b.dataset.p===p));
+  document.getElementById('courseT').textContent=PN[p];document.getElementById('courseS').textContent=fmt(meters(p));
+  if(map){lines.forEach(o=>o.ln.setOptions({strokeOpacity:(p==='all'||o.p===p)?1:.18}));map.setBounds(bounds[p],50,50,50,50);}}
+document.querySelectorAll('#tabs button').forEach(b=>b.addEventListener('click',()=>setPeriod(b.dataset.p)));
+document.getElementById('fitBtn').addEventListener('click',()=>setPeriod('all'));
+setPeriod('all');
+
+/* 지도 */
+function err(msg){const e=document.getElementById('maperr');e.hidden=false;e.innerHTML=msg;}
 function init(){
   K=kakao.maps;const LL=(a,b)=>new K.LatLng(a,b);
   map=new K.Map(document.getElementById('map'),{center:LL(37.5715,126.9880),level:5});
-  map.addControl(new K.MapTypeControl(),K.ControlPosition.TOPRIGHT);
   map.addControl(new K.ZoomControl(),K.ControlPosition.RIGHT);
-  const all=new K.LatLngBounds();
-  const draw=(i,pts,inside)=>{const path=pts.map(p=>LL(p[0],p[1]));path.forEach(p=>all.extend(p));
-    new K.Polyline({map,path,strokeWeight:inside?7:9,strokeColor:'#FFFFFF',strokeOpacity:.9,zIndex:1});
-    const ln=new K.Polyline({map,path,strokeWeight:inside?3:5,strokeColor:inside?KH.체류:KH.도보,strokeOpacity:1,strokeStyle:inside?'shortdot':'solid',endArrow:true,zIndex:2});
-    (lines[i]=lines[i]||[]).push({ln,path,inside});};
-  ROWS.forEach((r,i)=>{if(r.path)draw(i,pathOf(r.path),false);if(r.inside)draw(i,pathOf(r.inside),true);});
-  PASS.forEach(([n,a,b])=>{const w=document.createElement('div');w.style.cssText='display:grid;justify-items:center';
-    w.innerHTML=`<div class="pk"></div><div class="mkl pl">${n}</div>`;
+  map.addControl(new K.MapTypeControl(),K.ControlPosition.TOPRIGHT);
+  ['all','am','pm','ev'].forEach(p=>bounds[p]=new K.LatLngBounds());
+  const add=(key,p,inside)=>{const path=P[key].map(q=>LL(q[0],q[1]));path.forEach(q=>{bounds.all.extend(q);bounds[p].extend(q);});
+    new K.Polyline({map,path,strokeWeight:inside?7:9,strokeColor:'#fff',strokeOpacity:.9,zIndex:1});
+    const ln=new K.Polyline({map,path,strokeWeight:inside?3:5,strokeColor:PC[p],strokeOpacity:1,strokeStyle:inside?'shortdot':'solid',endArrow:true,zIndex:2});lines.push({ln,p});};
+  S.forEach(s=>{if(s.path)add(s.path,s.p,false);if(s.inside)add(s.inside,s.p,true);});
+  add('a_lunch','am',false);
+  S.forEach(s=>{bounds[s.p].extend(LL(s.lat,s.lng));});
+  PASS.forEach(([n,a,b,p])=>{const w=document.createElement('div');w.className='pk';w.style.setProperty('--c',PC[p]);w.innerHTML=`<div class="d"></div><div class="lb">${n}</div>`;
     new K.CustomOverlay({map,position:LL(a,b),content:w,yAnchor:.15,zIndex:3});});
-  ROWS.forEach((r,i)=>{if(!r.at)return;const w=document.createElement('div');w.style.cssText='display:grid;justify-items:center';
-    const m=document.createElement('div');m.className='mk';m.style.setProperty('--c',KC[r.k]);m.textContent=r.n;m.title=`${r.s} ${r.p}`;
-    const l=document.createElement('div');l.className='mkl';l.textContent=r.short;w.append(m,l);
-    w.addEventListener('click',()=>select(i,true));
-    new K.CustomOverlay({map,position:LL(r.at[0],r.at[1]),content:w,yAnchor:.25,zIndex:r.k==='버스'?5:4});mks[i]=m;});
-  const fit=v=>{if(v==='all'){map.setBounds(all,40,40,40,40);return;}map.setBounds(new K.LatLngBounds(LL(...VIEWS[v][0]),LL(...VIEWS[v][1])));};
-  fit('all');
-  document.querySelectorAll('#views button').forEach(b=>b.addEventListener('click',()=>fit(b.dataset.v)));
-  document.querySelectorAll('#layers button').forEach(b=>b.addEventListener('click',()=>{
-    const on=b.getAttribute('aria-pressed')!=='true';b.setAttribute('aria-pressed',on);
-    on?map.addOverlayMapTypeId(K.MapTypeId[b.dataset.t]):map.removeOverlayMapTypeId(K.MapTypeId[b.dataset.t]);}));
+  S.forEach(s=>{const w=document.createElement('div');w.className='mk';w.style.setProperty('--c',PC[s.p]);w.innerHTML=`<div class="dot">${s.n}</div><div class="lb">${s.name}</div>`;
+    w.addEventListener('click',()=>pick(s.n));new K.CustomOverlay({map,position:LL(s.lat,s.lng),content:w,yAnchor:.25,zIndex:4});mk[s.n]=w;});
+  mk[cur]&&mk[cur].classList.add('on');
+  setPeriod(period);
 }
-function select(i,scroll){
-  if(cur!=null){rowEls[cur].classList.remove('on');mks[cur]&&mks[cur].classList.remove('on');(lines[cur]||[]).forEach(o=>o.ln.setOptions({strokeColor:o.inside?KH.체류:KH.도보,strokeWeight:o.inside?3:5}));}
-  cur=i;rowEls[i].classList.add('on');if(mks[i])mks[i].classList.add('on');
-  if(map){const r=ROWS[i];
-    if(lines[i]){lines[i].forEach(o=>o.ln.setOptions({strokeColor:'#E0457B',strokeWeight:o.inside?5:7}));
-      const b=new K.LatLngBounds();lines[i].forEach(o=>o.path.forEach(p=>b.extend(p)));if(r.at)b.extend(new K.LatLng(r.at[0],r.at[1]));map.setBounds(b,60,60,60,60);}
-    else if(r.at){map.setLevel(Math.min(map.getLevel(),4));map.panTo(new K.LatLng(r.at[0],r.at[1]));}}
-  if(scroll)rowEls[i].scrollIntoView({behavior:'smooth',block:'center'});
-}
-
-/* ---------- SDK ---------- */
-if(location.protocol==='file:')showErr('file');
-else{const sc=document.createElement('script');
-  sc.src=`https://dapi.kakao.com/v2/maps/sdk.js?appkey=${KAKAO_JS_KEY}&autoload=false`;
-  sc.onload=()=>{try{kakao.maps.load(init)}catch(e){showErr('load')}};
-  sc.onerror=()=>showErr('load');document.head.appendChild(sc);}
+if(location.protocol==='file:')err('파일을 더블클릭해서 열면 지도가 뜨지 않습니다.<br>https://suho-cloud.github.io/seoul-dapsa/ 주소로 여세요.');
+else{const sc=document.createElement('script');sc.src=`https://dapi.kakao.com/v2/maps/sdk.js?appkey=${KAKAO_JS_KEY}&autoload=false`;
+  sc.onload=()=>{try{kakao.maps.load(init)}catch(e){err('카카오 지도를 불러오지 못했습니다.')}};
+  sc.onerror=()=>err('카카오 지도를 불러오지 못했습니다.<br>카카오 디벨로퍼스의 도메인 등록을 확인하세요.');document.head.appendChild(sc);}
 </script>
 </body>
 </html>
